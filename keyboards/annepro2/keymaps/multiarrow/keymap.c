@@ -1,6 +1,6 @@
-#include <stdint.h>
 #include "annepro2.h"
 #include "qmk_ap2_led.h"
+#include <stdint.h>
 
 enum anne_pro_layers {
   _BASE_LAYER,
@@ -8,6 +8,7 @@ enum anne_pro_layers {
   _FN2_LAYER,
 };
 
+// clang-format off
 /*
 * Layer _BASE_LAYER
 * ,-----------------------------------------------------------------------------------------.
@@ -23,7 +24,7 @@ enum anne_pro_layers {
 * \-----------------------------------------------------------------------------------------/
 *
 */
- const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_BASE_LAYER] = KEYMAP( /* Base */
     KC_ESC, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL, KC_BSPC,
     KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC, KC_RBRC, KC_BSLS,
@@ -76,6 +77,8 @@ enum anne_pro_layers {
     KC_TRNS, KC_TRNS, KC_TRNS, KC_ENT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
  ),
 };
+// clang-format on;
+
 const uint16_t keymaps_size = sizeof(keymaps);
 
 

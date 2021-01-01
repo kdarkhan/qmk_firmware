@@ -1,6 +1,6 @@
-#include <stdint.h>
 #include "annepro2.h"
 #include "qmk_ap2_led.h"
+#include <stdint.h>
 
 enum anne_pro_layers {
   _BASE_LAYER,
@@ -12,6 +12,7 @@ enum anne_pro_layers {
 // This is ROW*MATRIX_COLS + COL
 #define CAPS_LOCATION (MATRIX_COLS * 2 + 0)
 
+// clang-format off
 const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /*
   * Layer _BASE_LAYER
@@ -120,20 +121,15 @@ const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS,KC_TRNS, KC_TRNS,      KC_TRNS,             KC_TRNS,  KC_TRNS,  DF(_MAC_LAYER), DF(_BASE_LAYER)
   ),
 };
+// clang-format on
 
 const uint16_t keymaps_size = sizeof(keymaps);
 
+void matrix_init_user(void) {}
 
-void matrix_init_user(void) {
+void matrix_scan_user(void) {}
 
-}
-
-void matrix_scan_user(void) {
-}
-
-layer_state_t layer_state_set_user(layer_state_t layer) {
-    return layer;
-}
+layer_state_t layer_state_set_user(layer_state_t layer) { return layer; }
 
 bool led_update_user(led_t leds) {
   if (leds.caps_lock) {

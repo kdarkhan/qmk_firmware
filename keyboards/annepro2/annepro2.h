@@ -18,11 +18,11 @@
 #pragma once
 #include "quantum.h"
 
-#define OVERRIDE __attribute__ ((noinline))
+#define OVERRIDE __attribute__((noinline))
 
 typedef struct __attribute__((__packed__)) {
-    uint8_t _dummy[10];
-    bool caps_lock;
+  uint8_t _dummy[10];
+  bool caps_lock;
 } ble_capslock_t;
 
 extern uint16_t annepro2LedMatrix[MATRIX_ROWS * MATRIX_COLS];
@@ -30,17 +30,17 @@ extern uint16_t annepro2LedMatrix[MATRIX_ROWS * MATRIX_COLS];
 extern ble_capslock_t BLECapsLock;
 
 enum AP2KeyCodes {
-    KC_AP2_BT1 = SAFE_RANGE,
-    KC_AP2_BT2,
-    KC_AP2_BT3,
-    KC_AP2_BT4,
-    KC_AP2_BT_UNPAIR,
-    KC_AP2_USB,
-    KC_AP_LED_ON,
-    KC_AP_LED_OFF,
-    KC_AP_LED_NEXT_PROFILE,
-    KC_AP_LED_PREV_PROFILE,
-    KC_AP_LED_NEXT_INTENSITY,
-    KC_AP_LED_SPEED,
-    AP2_SAFE_RANGE,
+  KC_AP2_BT1 = SAFE_RANGE,
+  KC_AP2_BT2,
+  KC_AP2_BT3,
+  KC_AP2_BT4,
+  KC_AP2_BT_UNPAIR,
+  KC_AP2_USB,
+  KC_AP_LED_ON,
+  KC_AP_LED_OFF,
+  KC_AP_LED_NEXT_PROFILE,
+  KC_AP_LED_PREV_PROFILE,
+  KC_AP_LED_NEXT_INTENSITY,
+  KC_AP_LED_SPEED,
+  AP2_SAFE_RANGE,
 };

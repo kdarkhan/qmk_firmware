@@ -25,7 +25,8 @@ void eeprom_write(const void *buf, uint32_t addr, size_t len);
     This needs to be a normal GPIO pin_t value, such as A7.
 */
 #ifndef EXTERNAL_EEPROM_SPI_SLAVE_SELECT_PIN
-#    error "No chip select pin defined -- missing EXTERNAL_EEPROM_SPI_SLAVE_SELECT_PIN"
+#error                                                                         \
+    "No chip select pin defined -- missing EXTERNAL_EEPROM_SPI_SLAVE_SELECT_PIN"
 #endif
 
 /*
@@ -35,18 +36,18 @@ void eeprom_write(const void *buf, uint32_t addr, size_t len);
     your EEPROM.
 */
 #ifndef EXTERNAL_EEPROM_SPI_CLOCK_DIVISOR
-#    ifdef __AVR__
-#        define EXTERNAL_EEPROM_SPI_CLOCK_DIVISOR 8
-#    else
-#        define EXTERNAL_EEPROM_SPI_CLOCK_DIVISOR 64
-#    endif
+#ifdef __AVR__
+#define EXTERNAL_EEPROM_SPI_CLOCK_DIVISOR 8
+#else
+#define EXTERNAL_EEPROM_SPI_CLOCK_DIVISOR 64
+#endif
 #endif
 
 /*
     The SPI mode to communicate with the EEPROM.
 */
 #ifndef EXTERNAL_EEPROM_SPI_MODE
-#    define EXTERNAL_EEPROM_SPI_MODE 0
+#define EXTERNAL_EEPROM_SPI_MODE 0
 #endif
 
 /*
@@ -54,7 +55,7 @@ void eeprom_write(const void *buf, uint32_t addr, size_t len);
     LSB-first.
 */
 #ifndef EXTERNAL_EEPROM_SPI_LSBFIRST
-#    define EXTERNAL_EEPROM_SPI_LSBFIRST false
+#define EXTERNAL_EEPROM_SPI_LSBFIRST false
 #endif
 
 /*
@@ -62,14 +63,14 @@ void eeprom_write(const void *buf, uint32_t addr, size_t len);
     specify this value in kbits, and will require conversion to bytes.
 */
 #ifndef EXTERNAL_EEPROM_BYTE_COUNT
-#    define EXTERNAL_EEPROM_BYTE_COUNT 8192
+#define EXTERNAL_EEPROM_BYTE_COUNT 8192
 #endif
 
 /*
     The page size in bytes of the EEPROM, as specified in the datasheet.
 */
 #ifndef EXTERNAL_EEPROM_PAGE_SIZE
-#    define EXTERNAL_EEPROM_PAGE_SIZE 32
+#define EXTERNAL_EEPROM_PAGE_SIZE 32
 #endif
 
 /*
@@ -80,5 +81,5 @@ void eeprom_write(const void *buf, uint32_t addr, size_t len);
     As expected, consult the datasheet for specifics of your EEPROM.
 */
 #ifndef EXTERNAL_EEPROM_ADDRESS_SIZE
-#    define EXTERNAL_EEPROM_ADDRESS_SIZE 2
+#define EXTERNAL_EEPROM_ADDRESS_SIZE 2
 #endif

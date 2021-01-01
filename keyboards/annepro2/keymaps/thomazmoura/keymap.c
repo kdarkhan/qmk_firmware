@@ -1,7 +1,7 @@
-#include <stdint.h>
 #include "annepro2.h"
-#include "qmk_ap2_led.h"
 #include "config.h"
+#include "qmk_ap2_led.h"
+#include <stdint.h>
 
 enum anne_pro_layers {
   _BASE_LAYER,
@@ -12,18 +12,18 @@ enum anne_pro_layers {
 };
 
 typedef struct {
-    bool is_press_action;
-    uint8_t state;
+  bool is_press_action;
+  uint8_t state;
 } tap;
 
 // Define a type for as many tap dance states as you need
 enum {
-    SINGLE_TAP = 1,
-    SINGLE_HOLD,
-    DOUBLE_TAP,
-    DOUBLE_HOLD,
-    TRIPLE_TAP,
-    TRIPLE_HOLD
+  SINGLE_TAP = 1,
+  SINGLE_HOLD,
+  DOUBLE_TAP,
+  DOUBLE_HOLD,
+  TRIPLE_TAP,
+  TRIPLE_HOLD
 };
 
 enum profile {
@@ -31,7 +31,7 @@ enum profile {
   GREEN,
   BLUE,
   RAINBOWHORIZONTAL,
-  RAINBOWVERTICAL, 
+  RAINBOWVERTICAL,
   ANIMATEDRAINBOWVERTICAL,
   ANIMATEDRAINBOWFLOW,
   ANIMATEDRAINBOWWATERFALL,
@@ -39,25 +39,18 @@ enum profile {
   ANIMATEDSPECTRUM
 };
 
-uint8_t cyclabe_profiles[] = {
-  IDLE_PROFILE_INDEX,
-  ANIMATEDRAINBOWFLOW,
-  ANIMATEDRAINBOWVERTICAL,
-  ANIMATEDRAINBOWWATERFALL,
-  ANIMATEDBREATHING,
-  ANIMATEDSPECTRUM
-};
+uint8_t cyclabe_profiles[] = {IDLE_PROFILE_INDEX,      ANIMATEDRAINBOWFLOW,
+                              ANIMATEDRAINBOWVERTICAL, ANIMATEDRAINBOWWATERFALL,
+                              ANIMATEDBREATHING,       ANIMATEDSPECTRUM};
 
-enum custom_codes {
-  NEXT_PROFILE = AP2_SAFE_RANGE,
-  ENABLE_OR_DISABLE_LEDS
-};
+enum custom_codes { NEXT_PROFILE = AP2_SAFE_RANGE, ENABLE_OR_DISABLE_LEDS };
 
 enum {
-    ESC_TAP_DANCE,
-    GRV_TAP_DANCE,
+  ESC_TAP_DANCE,
+  GRV_TAP_DANCE,
 };
 
+// clang-format off
 /*
 * Layer _BASE_LAYER
 * ,-----------------------------------------------------------------------------------------.
@@ -82,7 +75,7 @@ enum {
 * |       |       |       |               Space             |       |       |       |       |
 * \-----------------------------------------------------------------------------------------/
 */
- const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  [_BASE_LAYER] = KEYMAP( /* Base */
             KC_GRV,    KC_1,    KC_2,  KC_3,  KC_4,  KC_5,      KC_6,    KC_7,    KC_8,           KC_9,     KC_0,   KC_MINS,  KC_EQL, KC_BSPC,
             KC_TAB,    KC_Q,    KC_W,  KC_E,  KC_R,  KC_T,      KC_Y,    KC_U,    KC_I,           KC_O,     KC_P,   KC_LBRC, KC_RBRC, KC_BSLS,
@@ -175,12 +168,13 @@ enum {
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, _______, _______, _______, _______,
     _______, _______, KC_ACL0, KC_ACL1, KC_ACL2, _______, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_BTN2, _______, _______,
-    _______, _______, _______, _______, _______, _______, KC_BTN3, KC_BTN4, KC_BTN5, _______, _______, _______, 
+    _______, _______, _______, _______, _______, _______, KC_BTN3, KC_BTN4, KC_BTN5, _______, _______, _______,
     _______, _______, _______, KC_BTN1, _______, _______, _______, _______
  ),
 };
-const uint16_t keymaps_size = sizeof(keymaps);
+// clang-format on
 
+const uint16_t keymaps_size = sizeof(keymaps);
 
 // Declare the functions to be used with your tap dance key(s)
 
@@ -188,7 +182,7 @@ const uint16_t keymaps_size = sizeof(keymaps);
 uint8_t cur_dance(qk_tap_dance_state_t *state);
 
 // Functions associated with individual tap dances
-void enableProfileColor(uint8_t * profile);
+void enableProfileColor(uint8_t *profile);
 void resetProfileColor(void);
 void esc_layer_finished(qk_tap_dance_state_t *state, void *user_data);
 void esc_layer_reset(qk_tap_dance_state_t *state, void *user_data);
@@ -197,19 +191,16 @@ bool is_caps_set = false;
 bool is_led_on = true;
 uint8_t base_profile = IDLE_PROFILE_INDEX;
 
-uint8_t idle_profile[] = {0x00,0x00,0x00};
-uint8_t caps_profile[] = {0xFF,0x00,0x00};
-uint8_t function_profile[] = {0x00,0xFF,0x00};
-uint8_t navigation_profile[] = {0x44,0x00,0xFF};
-uint8_t numpad_profile[] = {0xFF,0xDD,0x00};
-uint8_t mouse_profile[] = {0x00,0x88,0xFF};
+uint8_t idle_profile[] = {0x00, 0x00, 0x00};
+uint8_t caps_profile[] = {0xFF, 0x00, 0x00};
+uint8_t function_profile[] = {0x00, 0xFF, 0x00};
+uint8_t navigation_profile[] = {0x44, 0x00, 0xFF};
+uint8_t numpad_profile[] = {0xFF, 0xDD, 0x00};
+uint8_t mouse_profile[] = {0x00, 0x88, 0xFF};
 
-void matrix_init_user(void) {
+void matrix_init_user(void) {}
 
-}
-
-void matrix_scan_user(void) {
-}
+void matrix_scan_user(void) {}
 
 void keyboard_post_init_user(void) {
   annepro2LedEnable();
@@ -222,7 +213,7 @@ bool led_update_user(led_t leds) {
     is_caps_set = true;
     enableProfileColor(caps_profile);
     return true;
-  } else if(is_caps_set) {
+  } else if (is_caps_set) {
     is_caps_set = false;
     resetProfileColor();
   }
@@ -231,22 +222,22 @@ bool led_update_user(led_t leds) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-  switch(get_highest_layer(state)) {
-    case _FUNCTION_LAYER:
-      enableProfileColor(function_profile);
-      break;
-    case _NUMPAD_LAYER:
-      enableProfileColor(numpad_profile);
-      break;
-    case _MOUSE_LAYER:
-      enableProfileColor(mouse_profile);
-      break;
-    case _MEDIA_AND_NAVIGATION_LAYER:
-      enableProfileColor(navigation_profile);
-      break;
-    default:
-      resetProfileColor();
-      break;
+  switch (get_highest_layer(state)) {
+  case _FUNCTION_LAYER:
+    enableProfileColor(function_profile);
+    break;
+  case _NUMPAD_LAYER:
+    enableProfileColor(numpad_profile);
+    break;
+  case _MOUSE_LAYER:
+    enableProfileColor(mouse_profile);
+    break;
+  case _MEDIA_AND_NAVIGATION_LAYER:
+    enableProfileColor(navigation_profile);
+    break;
+  default:
+    resetProfileColor();
+    break;
   }
 
   return state;
@@ -255,74 +246,80 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 // Determine the current tap dance state
 uint8_t cur_dance(qk_tap_dance_state_t *state) {
   if (state->count == 1) {
-    if (!state->pressed) return SINGLE_TAP;
-    else return SINGLE_HOLD;
+    if (!state->pressed)
+      return SINGLE_TAP;
+    else
+      return SINGLE_HOLD;
   } else if (state->count == 2) {
-    if (!state->pressed) return DOUBLE_TAP;
-    else return DOUBLE_HOLD;
+    if (!state->pressed)
+      return DOUBLE_TAP;
+    else
+      return DOUBLE_HOLD;
   } else if (state->count == 3) {
-    if (!state->pressed) return TRIPLE_TAP;
-    else return TRIPLE_HOLD;
-  }  else return 8;
+    if (!state->pressed)
+      return TRIPLE_TAP;
+    else
+      return TRIPLE_HOLD;
+  } else
+    return 8;
 }
 
 // Initialize tap structure associated with example tap dance key
-static tap esc_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
+static tap esc_tap_state = {.is_press_action = true, .state = 0};
 
-static tap grav_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
+static tap grav_tap_state = {.is_press_action = true, .state = 0};
 
-void enableProfileColor (uint8_t * profile) {
-  if(is_caps_set) {
-    annepro2LedSetForegroundColor(caps_profile[0], caps_profile[1], caps_profile[2]);
+void enableProfileColor(uint8_t *profile) {
+  if (is_caps_set) {
+    annepro2LedSetForegroundColor(caps_profile[0], caps_profile[1],
+                                  caps_profile[2]);
   } else {
     annepro2LedSetForegroundColor(profile[0], profile[1], profile[2]);
   }
 }
 
 void resetProfileColor(void) {
-  if(is_caps_set) {
-    annepro2LedSetForegroundColor(caps_profile[0], caps_profile[1], caps_profile[2]);
-  } else if(base_profile == IDLE_PROFILE_INDEX) {
-    annepro2LedSetForegroundColor(idle_profile[0], idle_profile[1], idle_profile[2]);
+  if (is_caps_set) {
+    annepro2LedSetForegroundColor(caps_profile[0], caps_profile[1],
+                                  caps_profile[2]);
+  } else if (base_profile == IDLE_PROFILE_INDEX) {
+    annepro2LedSetForegroundColor(idle_profile[0], idle_profile[1],
+                                  idle_profile[2]);
   } else {
     annepro2LedSetProfile(cyclabe_profiles[base_profile]);
-  } 
+  }
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case NEXT_PROFILE:
-      if (record->event.pressed) {
-        base_profile++;
-        if(base_profile >= (sizeof(cyclabe_profiles)/sizeof(cyclabe_profiles[0])))
-          base_profile = IDLE_PROFILE_INDEX;
+  case NEXT_PROFILE:
+    if (record->event.pressed) {
+      base_profile++;
+      if (base_profile >=
+          (sizeof(cyclabe_profiles) / sizeof(cyclabe_profiles[0])))
+        base_profile = IDLE_PROFILE_INDEX;
 
-        if(base_profile == IDLE_PROFILE_INDEX) {
-          annepro2LedSetForegroundColor(idle_profile[0], idle_profile[1], idle_profile[2]);
-        } else {
-          annepro2LedSetProfile(cyclabe_profiles[base_profile]);
-        }
+      if (base_profile == IDLE_PROFILE_INDEX) {
+        annepro2LedSetForegroundColor(idle_profile[0], idle_profile[1],
+                                      idle_profile[2]);
+      } else {
+        annepro2LedSetProfile(cyclabe_profiles[base_profile]);
       }
-      return true;
-    case ENABLE_OR_DISABLE_LEDS:
-      if (record->event.pressed) {
-        if(is_led_on) {
-          is_led_on = false;
-          annepro2LedDisable();
-        } else {
-          annepro2LedEnable();
-          is_led_on = true;
-        }
+    }
+    return true;
+  case ENABLE_OR_DISABLE_LEDS:
+    if (record->event.pressed) {
+      if (is_led_on) {
+        is_led_on = false;
+        annepro2LedDisable();
+      } else {
+        annepro2LedEnable();
+        is_led_on = true;
       }
-      return true;
-    default:
-      return true;
+    }
+    return true;
+  default:
+    return true;
   }
 }
 
@@ -331,34 +328,34 @@ void esc_layer_finished(qk_tap_dance_state_t *state, void *user_data) {
   esc_tap_state.state = cur_dance(state);
 
   switch (esc_tap_state.state) {
-    case SINGLE_TAP:
+  case SINGLE_TAP:
+    tap_code(KC_ESC);
+    break;
+  case SINGLE_HOLD:
+    layer_on(_FUNCTION_LAYER);
+    break;
+  case DOUBLE_TAP:
+    if (layer_state_is(_MOUSE_LAYER) || layer_state_is(_NUMPAD_LAYER)) {
+      layer_off(_MOUSE_LAYER);
+      layer_off(_NUMPAD_LAYER);
+    } else {
       tap_code(KC_ESC);
-      break;
-    case SINGLE_HOLD:
-      layer_on(_FUNCTION_LAYER);
-      break;
-    case DOUBLE_TAP:
-      if (layer_state_is(_MOUSE_LAYER) || layer_state_is(_NUMPAD_LAYER)) {
-        layer_off(_MOUSE_LAYER);
-        layer_off(_NUMPAD_LAYER);
-      } else {
-        tap_code(KC_ESC);
-        tap_code(KC_ESC);
-      }
-      break;
-    case DOUBLE_HOLD:
-      layer_on(_NUMPAD_LAYER);
-      break;
-    case TRIPLE_TAP:
-      if (layer_state_is(_MOUSE_LAYER)) {
-        layer_off(_MOUSE_LAYER);
-      } else {
-        layer_on(_MOUSE_LAYER);
-      }
-      break;
-    case TRIPLE_HOLD:
+      tap_code(KC_ESC);
+    }
+    break;
+  case DOUBLE_HOLD:
+    layer_on(_NUMPAD_LAYER);
+    break;
+  case TRIPLE_TAP:
+    if (layer_state_is(_MOUSE_LAYER)) {
+      layer_off(_MOUSE_LAYER);
+    } else {
       layer_on(_MOUSE_LAYER);
-      break;
+    }
+    break;
+  case TRIPLE_HOLD:
+    layer_on(_MOUSE_LAYER);
+    break;
   }
 }
 
@@ -381,22 +378,22 @@ void grave_layer_finished(qk_tap_dance_state_t *state, void *user_data) {
   grav_tap_state.state = cur_dance(state);
 
   switch (grav_tap_state.state) {
-    case SINGLE_TAP:
-      tap_code(KC_GRV);
-      break;
-    case SINGLE_HOLD:
-      tap_code(KC_GRV);
-      break;
-    case DOUBLE_TAP:
-      // Check to see if the layer is already set
-      if (layer_state_is(_MOUSE_LAYER)) {
-        // If already set, then switch it off
-        layer_off(_MOUSE_LAYER);
-      } else {
-        // If not already set, then switch the layer on
-        layer_on(_MOUSE_LAYER);
-      }
-      break;
+  case SINGLE_TAP:
+    tap_code(KC_GRV);
+    break;
+  case SINGLE_HOLD:
+    tap_code(KC_GRV);
+    break;
+  case DOUBLE_TAP:
+    // Check to see if the layer is already set
+    if (layer_state_is(_MOUSE_LAYER)) {
+      // If already set, then switch it off
+      layer_off(_MOUSE_LAYER);
+    } else {
+      // If not already set, then switch the layer on
+      layer_on(_MOUSE_LAYER);
+    }
+    break;
   }
 }
 
@@ -413,7 +410,7 @@ void grave_layer_reset(qk_tap_dance_state_t *state, void *user_data) {
 
 // Associate our tap dance key with its functionality
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [ESC_TAP_DANCE] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, esc_layer_finished, esc_layer_reset, 250),
-  [GRV_TAP_DANCE] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, grave_layer_finished, grave_layer_reset, 300)
-};
-
+    [ESC_TAP_DANCE] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(
+        NULL, esc_layer_finished, esc_layer_reset, 250),
+    [GRV_TAP_DANCE] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(
+        NULL, grave_layer_finished, grave_layer_reset, 300)};

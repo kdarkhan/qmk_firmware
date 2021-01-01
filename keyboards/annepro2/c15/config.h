@@ -18,13 +18,13 @@
 #pragma once
 
 /* USB Device descriptor parameter */
-#define VENDOR_ID       0x04d9
-#define PRODUCT_ID      0xa290
-#define DEVICE_VER      0x1337
-#define MANUFACTURER    Holtek
-#define PRODUCT         Anne Pro 2 QMK
-#define DESCRIPTION     Anne Pro 2 with QMK
-#define NAME_SLUG       "annepro2"
+#define VENDOR_ID 0x04d9
+#define PRODUCT_ID 0xa290
+#define DEVICE_VER 0x1337
+#define MANUFACTURER Holtek
+#define PRODUCT Anne Pro 2 QMK
+#define DESCRIPTION Anne Pro 2 with QMK
+#define NAME_SLUG "annepro2"
 
 #define ANNEPRO2_C15
 
@@ -43,6 +43,7 @@
 
 // Matrix keymap
 
+// clang-format off
 #define KEYMAP( \
     K00, K01, K02, K03, K04, K05, K06, K07, K08, K09, K0A, K0B, K0C, K0D, \
     K10, K11, K12, K13, K14, K15, K16, K17, K18, K19, K1A, K1B, K1C, K1D, \
@@ -57,14 +58,17 @@
     /* ROW4  */ { K30,   KC_NO, K32,   K33,   K34,   K35,   K36,   K37,   K38,   K39,   K3A,   K3B,   K3C,   KC_NO}, \
     /* ROW5  */ { K40,   KC_NO, K42,   K43,   KC_NO, KC_NO, K46,   KC_NO, KC_NO, K49,   K4A,   K4B,   K4C,   KC_NO}, \
 }
+// clang-format on
 
-/* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
+/* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is
+ * not needed */
 #define DEBOUNCE 5
 
 /* number of backlight levels */
 // #define BACKLIGHT_LEVELS 10
 
-/* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
+/* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap
+ */
 //#define LOCKING_SUPPORT_ENABLE
 /* Locking resynchronize hack */
 //#define LOCKING_RESYNC_ENABLE
@@ -78,8 +82,8 @@
  * Force NKRO
  *
  * Force NKRO (nKey Rollover) to be enabled by default, regardless of the saved
- * state in the bootmagic EEPROM settings. (Note that NKRO must be enabled in the
- * makefile for this to work.)
+ * state in the bootmagic EEPROM settings. (Note that NKRO must be enabled in
+ * the makefile for this to work.)
  *
  * If forced on, NKRO can be disabled via magic key (default = LShift+RShift+N)
  * until the next keyboard reset.
@@ -89,8 +93,8 @@
  *
  * For a less heavy-handed approach, enable NKRO via magic key (LShift+RShift+N)
  * or via bootmagic (hold SPACE+N while plugging in the keyboard). Once set by
- * bootmagic, NKRO mode will always be enabled until it is toggled again during a
- * power-up.
+ * bootmagic, NKRO mode will always be enabled until it is toggled again during
+ * a power-up.
  *
  */
 #define FORCE_NKRO
@@ -103,7 +107,8 @@
  * found here: https://www.pjrc.com/teensy/hid_listen.html
  *
  * The options below allow the magic key functionality to be changed. This is
- * useful if your keyboard/keypad is missing keys and you want magic key support.
+ * useful if your keyboard/keypad is missing keys and you want magic key
+ * support.
  *
  */
 
@@ -167,4 +172,3 @@
 //#define NO_ACTION_ONESHOT
 //#define NO_ACTION_MACRO
 //#define NO_ACTION_FUNCTION
-
