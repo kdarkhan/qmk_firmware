@@ -1,0 +1,9 @@
+//#define DYNAMIC_KEYMAP_LAYER_COUNT 4
+
+//#define ENCODER_MAP_KEY_DELAY 50
+#define EE_HANDS
+//#define OLED_UPDATE_INTERVAL 200
+
+#ifdef OLED_ENABLE
+    #define OLED_TIMEOUT 120000
+#endif
