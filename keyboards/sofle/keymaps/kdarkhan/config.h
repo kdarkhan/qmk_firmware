@@ -24,6 +24,8 @@
 
 
 #define MASTER_LEFT
+#define OLED_TIMEOUT 20000
+#define WPM_SMOOTHING 0.6
 // #define MASTER_RIGHT
 // #define EE_HANDS
 
