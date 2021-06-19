@@ -220,9 +220,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,------------------------------------------------.                    ,---------------------------------------------------.
   EEP_RST, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
-  RESET,   XXXXXXX,KC_QWERTY,XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  RESET,   XXXXXXX,KC_QWERTY,XXXXXXX, XXXXXXX, XXXXXXX,             A(G(KC_LEFT)),A(G(KC_DOWN)),A(G(KC_UP)),A(G(KC_RGHT)), XXXXXXX, XXXXXXX,
   //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
-  RGB_TOG, RGB_HUI,RGB_SAI, RGB_VAI, XXXXXXX, XXXXXXX,               C(G(KC_LEFT)),XXXXXXX, KC_NO,C(G(KC_RGHT)),XXXXXXX, XXXXXXX,
+  RGB_TOG, RGB_HUI,RGB_SAI, RGB_VAI, A(G(KC_F)),XXXXXXX,            LCAG(KC_LEFT),KC_NO,KC_NO, LCAG(KC_RGHT),XXXXXXX, XXXXXXX,
   //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
   RGB_MOD, RGB_HUD,RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,XXXXXXX,   XXXXXXX, XXXXXXX, KC_QWERTY_MAC, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
   //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
@@ -566,7 +566,7 @@ typedef struct ENCODER_STATE {
 
 const static ENCODER_STATE left[] = {
     { KC_MUTE, KC_VOLU, KC_VOLD, "VOL  " },
-    { KC_MS_BTN1, KC_MS_L, KC_MS_R, "MSH  "},
+    { KC_MUTE, KC_BRIU, KC_BRID, "BRH  "},
 };
 
 const static ENCODER_STATE right[] = {
