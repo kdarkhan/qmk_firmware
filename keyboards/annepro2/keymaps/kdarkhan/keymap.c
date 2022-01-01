@@ -45,6 +45,7 @@ enum anne_pro_layers {
   _FN1_LAYER,
   _FN2_LAYER,
   _TAP2_LAYER,
+  _FNX_LAYER,
 };
 
 // clang-format off
@@ -76,10 +77,10 @@ const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
         KC_LCTL, KC_LALT, KC_LGUI, KC_SPC, TT(_FN1_LAYER), LT(_FN2_LAYER, KC_APP), KC_RALT, TD(KC_AP_TD_RCTRL)),
     [_CAPS_LAYER] = KEYMAP(/* Hold CapsLock */
-        _______, _______, _______, _______, _______, KC_AUDIO_VOL_DOWN, KC_AUDIO_MUTE, KC_AUDIO_VOL_UP, _______, _______, _______, _______, _______, KC_DELETE,
-        _______, _______, _______, _______, KC_MEDIA_PREV_TRACK, KC_MEDIA_PLAY_PAUSE, KC_MEDIA_NEXT_TRACK, KC_WWW_BACK, KC_WWW_HOME, KC_WWW_SEARCH, KC_PSCREEN, KC_HOME, KC_END, _______,
-        _______, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_PGUP, KC_PGDN, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_INSERT, KC_DELETE, _______,
+        _______, _______, _______, _______, _______, KC_AUDIO_VOL_DOWN, KC_AUDIO_MUTE, KC_AUDIO_VOL_UP, KC_BRID, KC_BRIU, _______, _______, _______, KC_DELETE,
+        _______, _______, LCTL(KC_W), _______, LCTL(KC_R), LCTL(KC_T), _______, LCTL(KC_U), LCTL(KC_I), LCTL(KC_O), LCTL(KC_P), KC_HOME, KC_END, _______,
+        _______, _______, _______, LCTL(KC_D), LCTL(KC_F), _______, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_PGUP, KC_PGDN, _______,
+        _______, _______, _______, _______, LCTL(KC_V), LCTL(KC_B), _______, _______, _______, KC_INSERT, KC_DELETE, _______,
         _______, _______, _______, _______, _______, _______, _______, _______),
     [_FN1_LAYER]   = KEYMAP(/* FN1 */
         _______, _______, _______, _______, _______, _______, _______, _______, KC_KP_ASTERISK, KC_NUMLOCK, KC_KP_0, KC_KP_MINUS, KC_KP_PLUS, _______,
@@ -91,13 +92,19 @@ const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, KC_AP_WIN, _______, _______, _______, _______, _______, _______, _______, KC_PSCREEN, KC_HOME, KC_END, KC_AP_LED_ON,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_AP_LIN, KC_PGUP, KC_PGDN, KC_AP_LED_OFF,
-        KC_AP2_USB, KC_AP2_BT_UNPAIR, KC_AP2_BT1, KC_AP2_BT2, KC_AP2_BT3, KC_AP2_BT4, _______, KC_AP_MAC, _______, _______, _______, KC_AP_LED_NEXT_INTENSITY,
-        _______, _______, _______, _______, _______, _______, _______, KC_AP_LED_SPEED),
+        _______, _______, _______, _______, _______, _______, _______, KC_AP_MAC, _______, _______, _______, KC_AP_LED_NEXT_INTENSITY,
+        _______, _______, _______, _______, TT(_FNX_LAYER), _______, _______, KC_AP_LED_SPEED),
     [_TAP2_LAYER]   = KEYMAP(/* Hold |\ */
         _______, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, _______,
         _______, KC_MS_BTN1, KC_MS_UP, KC_MS_BTN2, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         KC_CAPS, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, KC_MS_WH_DOWN, _______, KC_MS_WH_UP, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______),
+    [_FNX_LAYER]   = KEYMAP(/* Holding FN1 and FN2 at the same time */
+        KC_AP2_USB, KC_AP2_BT1, KC_AP2_BT2, KC_AP2_BT3, KC_AP2_BT4, KC_AP2_BT_UNPAIR, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______),
 };
 // clang-format on
