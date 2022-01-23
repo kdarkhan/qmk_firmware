@@ -22,6 +22,7 @@ enum custom_codes {
   KC_AP_WIN = AP2_SAFE_RANGE,
   KC_AP_LIN,
   KC_AP_MAC,
+  KC_AP_WIFE,
   KC_AP_UNICODE
 };
 
@@ -39,6 +40,7 @@ static uint8_t usb_buf[256];
 static uint8_t buf_fil = 0;
 
 enum anne_pro_layers {
+  _WIFE_LAYER,
   _BASE_LAYER,
   _MAC_LAYER,
   _CAPS_LAYER,
@@ -64,6 +66,12 @@ enum anne_pro_layers {
  * \-----------------------------------------------------------------------------------------/
  */
 const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+    [_WIFE_LAYER]  = KEYMAP(/* Base */
+        KC_GRAVE, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL, KC_BSPC,
+        KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC, KC_RBRC, LT(_TAP2_LAYER, KC_BSLS),
+        LT(_CAPS_LAYER, KC_ESC), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCOLON, KC_QUOT, KC_ENT,
+        KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_UP,
+        KC_LCTL, KC_LGUI, KC_LALT, KC_SPC, TT(_FN1_LAYER), KC_LEFT, KC_DOWN, KC_RIGHT),
     [_BASE_LAYER]  = KEYMAP(/* Base */
         KC_GRAVE, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL, KC_BSPC,
         KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC, KC_RBRC, LT(_TAP2_LAYER, KC_BSLS),
@@ -85,12 +93,12 @@ const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_FN1_LAYER]   = KEYMAP(/* FN1 */
         _______, _______, _______, _______, _______, _______, _______, _______, KC_KP_ASTERISK, KC_NUMLOCK, KC_KP_0, KC_KP_MINUS, KC_KP_PLUS, _______,
         _______, _______, _______, _______, _______, _______, _______, KC_KP_7, KC_KP_8, KC_KP_9, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, KC_KP_4, KC_KP_5, KC_KP_6, _______, _______, _______,
+        _______, _______, _______, KC_AP_WIN, _______, _______, _______, KC_KP_4, KC_KP_5, KC_KP_6, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_SLASH, KC_UP,
         _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_RIGHT),
     [_FN2_LAYER]   = KEYMAP(/* FN2 */
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, KC_AP_WIN, _______, _______, _______, _______, _______, _______, _______, KC_PSCREEN, KC_HOME, KC_END, KC_AP_LED_ON,
+        _______, _______, KC_AP_WIN, KC_AP_WIFE, _______, _______, _______, _______, _______, _______, KC_PSCREEN, KC_HOME, KC_END, KC_AP_LED_ON,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_AP_LIN, KC_PGUP, KC_PGDN, KC_AP_LED_OFF,
         _______, _______, _______, _______, _______, _______, _______, KC_AP_MAC, _______, _______, _______, KC_AP_LED_NEXT_INTENSITY,
         _______, _______, _______, _______, TT(_FNX_LAYER), _______, _______, KC_AP_LED_SPEED),
@@ -164,6 +172,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case KC_AP_MAC:
     if (record->event.pressed) {
       default_layer_set(1 << _MAC_LAYER);
+      set_unicode_input_mode(UC_MAC);
+    }
+    return false;
+  case KC_AP_WIFE:
+    if (record->event.pressed) {
+      default_layer_set(1 << _WIFE_LAYER);
       set_unicode_input_mode(UC_MAC);
     }
     return false;
