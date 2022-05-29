@@ -2,8 +2,6 @@ NKRO_ENABLE = no
 MOUSEKEY_ENABLE = yes
 TAP_DANCE_ENABLE = yes
 LTO_ENABLE = yes
-# Attempt to fix KB freeze on suspend
-NO_USB_STARTUP_CHECK = yes
 
 UCIS_ENABLE = yes
 
