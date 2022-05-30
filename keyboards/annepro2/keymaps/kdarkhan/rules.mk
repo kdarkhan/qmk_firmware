@@ -1,0 +1,6 @@
+# NKRO_ENABLE = no
+MOUSEKEY_ENABLE = yes
+TAP_DANCE_ENABLE = yes
+LTO_ENABLE = yes
+
+UCIS_ENABLE = yes

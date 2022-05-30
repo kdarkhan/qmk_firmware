@@ -32,7 +32,11 @@ enum custom_codes {
   KC_AP_LIN,
   KC_AP_MAC,
   KC_AP_WIFE,
-  KC_AP_UNICODE
+  KC_AP_UNICODE,
+};
+
+enum tap_dance_codes {
+  KC_AP_TD_RCTRL
 };
 
 // clang-format off
@@ -160,3 +164,41 @@ bool led_update_user(led_t leds) {
 
     return true;
 }
+
+void dance_cln_finished(qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count == 3) {
+        // tap 3 times to start unicode input
+        qk_ucis_start();
+    } else {
+        register_code(KC_RCTL);
+    }
+}
+
+void dance_cln_reset(qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count != 3) {
+        unregister_code(KC_RCTL);
+    }
+}
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+    [KC_AP_TD_RCTRL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_cln_finished, dance_cln_reset),
+};
+
+
+const qk_ucis_symbol_t ucis_symbol_table[] = UCIS_TABLE(
+    UCIS_SYM("poop", 0x1F4A9),                  // 💩
+    UCIS_SYM("rofl", 0x1F923),                  // 🤣
+    UCIS_SYM("tm", 0x2122),                     // ™
+    UCIS_SYM("copy", 0x00A9),                   //©
+    UCIS_SYM("look", 0x0CA0, 0x005F, 0x0CA0),   // ಠ_ಠ
+    UCIS_SYM("euro", 0x20AC),                   // €
+    UCIS_SYM("shrug", 0xAF, 0x5C, 0X5F, 0x28, 0x30C4, 0x29, 0x5F, 0x2F, 0xAF),  // ¯\_(ツ)_/¯
+    UCIS_SYM("sweat", 0x1F605),                  // 😅
+    UCIS_SYM("kiss", 0x1F48B),                   // 💋
+    UCIS_SYM("wave", 0x1F44B),                   // 👋
+    UCIS_SYM("thumb", 0x1F44D),                  // 👍
+    UCIS_SYM("up", 0x2B06, 0xFE0F),              // ⬆
+    UCIS_SYM("down", 0x2B07, 0xFE0F),             // ⬆
+    UCIS_SYM("flip", 0x28, 0x256F, 0xB0, 0x25A1, 0xB0, 0x29, 0x256F, 0xFE35, 0x20, 0x253B, 0x2501, 0x253B),             // (╯°□°)╯︵ ┻━┻
+    UCIS_SYM("face",0x28, 0x20, 0x360, 0xB0, 0x20, 0x35F, 0x296, 0x20, 0x361, 0xB0, 0x29)  // ( ͠° ͟ʖ ͡°)
+);
