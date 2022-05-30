@@ -14,6 +14,8 @@
   * along with this program.  If not, see <http://www.gnu.org/licenses/>.
   */
 
+#include <sys/_stdint.h>
+#include "rgb_matrix.h"
 #include QMK_KEYBOARD_H
 
 enum anne_pro_layers {
@@ -33,6 +35,7 @@ enum custom_codes {
   KC_AP_MAC,
   KC_AP_WIFE,
   KC_AP_UNICODE,
+  KC_AP_RGB_SPEED,
 };
 
 enum tap_dance_codes {
@@ -100,10 +103,10 @@ enum tap_dance_codes {
         _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_RIGHT),
     [_FN2_LAYER]   = LAYOUT_60_ansi(/* FN2 */
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, KC_AP_WIN, KC_AP_WIFE, _______, _______, _______, _______, _______, _______, KC_PSCREEN, KC_HOME, KC_END, KC_AP_LED_ON,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_PGUP, KC_PGDN, KC_AP_LED_OFF,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_AP_LED_NEXT_INTENSITY,
-        _______, _______, _______, _______, TT(_FNX_LAYER), _______, _______, KC_AP_LED_SPEED),
+        _______, _______, KC_AP_WIN, KC_AP_WIFE, _______, _______, _______, _______, _______, _______, KC_PSCREEN, KC_HOME, KC_END, RGB_TOG,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_PGUP, KC_PGDN, RGB_MOD,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_VAI,
+        _______, _______, _______, _______, TT(_FNX_LAYER), _______, _______, KC_AP_RGB_SPEED),
     [_TAP2_LAYER]   = LAYOUT_60_ansi(/* Hold |\ */
         _______, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, _______,
         _______, KC_MS_BTN1, KC_MS_UP, KC_MS_BTN2, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
@@ -202,3 +205,20 @@ const qk_ucis_symbol_t ucis_symbol_table[] = UCIS_TABLE(
     UCIS_SYM("flip", 0x28, 0x256F, 0xB0, 0x25A1, 0xB0, 0x29, 0x256F, 0xFE35, 0x20, 0x253B, 0x2501, 0x253B),             // (╯°□°)╯︵ ┻━┻
     UCIS_SYM("face",0x28, 0x20, 0x360, 0xB0, 0x20, 0x35F, 0x296, 0x20, 0x361, 0xB0, 0x29)  // ( ͠° ͟ʖ ͡°)
 );
+
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case KC_AP_RGB_SPEED:
+      if (record->event.pressed) {
+        // Do something when pressed
+        uint8_t current_speed = rgb_matrix_get_speed();
+        rgb_matrix_set_speed(current_speed + 51);
+      } else {
+        // Do something else when release
+      }
+      return false; // Skip all further processing of this key
+    default:
+      return true; // Process all other keycodes normally
+  }
+}
