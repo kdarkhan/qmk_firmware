@@ -21,7 +21,6 @@
 enum anne_pro_layers {
   _BASE_LAYER,
   _WIFE_LAYER,
-  _MAC_LAYER,
   _CAPS_LAYER,
   _FN1_LAYER,
   _FN2_LAYER,
@@ -34,7 +33,6 @@ enum custom_codes {
   KC_AP_LIN,
   KC_AP_MAC,
   KC_AP_WIFE,
-  KC_AP_UNICODE,
   KC_AP_RGB_SPEED,
 };
 
@@ -76,19 +74,13 @@ enum tap_dance_codes {
         KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC, KC_RBRC, LT(_TAP2_LAYER, KC_BSLS),
         LT(_CAPS_LAYER, KC_ESC), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCOLON, KC_QUOT, KC_ENT,
         KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
-        KC_LCTL, KC_LGUI, KC_LALT, KC_SPC, TT(_FN1_LAYER), LT(_FN2_LAYER, KC_APP), KC_RALT, KC_RCTRL),
+        KC_LCTL, KC_LGUI, KC_LALT, KC_SPC, TT(_FN1_LAYER), LT(_FN2_LAYER, KC_APP), KC_RALT, TD(KC_AP_TD_RCTRL)),
     [_WIFE_LAYER]  = LAYOUT_60_ansi(/* Base */
         KC_GRAVE, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL, KC_BSPC,
         KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC, KC_RBRC, LT(_TAP2_LAYER, KC_BSLS),
         LT(_CAPS_LAYER, KC_ESC), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCOLON, KC_QUOT, KC_ENT,
         KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_UP,
         KC_LCTL, KC_LGUI, KC_LALT, KC_SPC, TT(_FN1_LAYER), KC_LEFT, KC_DOWN, KC_RIGHT),
-    [_MAC_LAYER]   = LAYOUT_60_ansi(/* Mac */
-        KC_GRAVE, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL, KC_BSPC,
-        MT(MOD_LGUI, KC_TAB), KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC, KC_RBRC, LT(_TAP2_LAYER, KC_BSLS),
-        LT(_CAPS_LAYER, KC_ESC), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCOLON, KC_QUOT, KC_ENT,
-        KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
-        KC_LCTL, KC_LALT, KC_LGUI, KC_SPC, TT(_FN1_LAYER), LT(_FN2_LAYER, KC_APP), KC_RALT, KC_RCTRL),
     [_CAPS_LAYER] = LAYOUT_60_ansi(/* Hold CapsLock */
         _______, _______, _______, _______, _______, KC_AUDIO_VOL_DOWN, KC_AUDIO_MUTE, KC_AUDIO_VOL_UP, KC_BRID, KC_BRIU, _______, _______, _______, KC_DELETE,
         _______, _______, LCTL(KC_W), _______, LCTL(KC_R), LCTL(KC_T), _______, LCTL(KC_U), LCTL(KC_I), LCTL(KC_O), LCTL(KC_P), KC_HOME, KC_END, _______,
@@ -103,7 +95,7 @@ enum tap_dance_codes {
         _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_RIGHT),
     [_FN2_LAYER]   = LAYOUT_60_ansi(/* FN2 */
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, KC_AP_WIN, KC_AP_WIFE, _______, _______, _______, _______, _______, _______, KC_PSCREEN, KC_HOME, KC_END, RGB_TOG,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_PSCREEN, KC_HOME, KC_END, RGB_TOG,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_PGUP, KC_PGDN, RGB_MOD,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_VAI,
         _______, _______, _______, _______, TT(_FNX_LAYER), _______, _______, KC_AP_RGB_SPEED),
@@ -113,11 +105,11 @@ enum tap_dance_codes {
         KC_CAPS, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, KC_MS_WH_DOWN, _______, KC_MS_WH_UP, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______),
-    [_FNX_LAYER]   = LAYOUT_60_ansi(/* Holding FN1 and FN2 at the same time */
+    [_FNX_LAYER]   = LAYOUT_60_ansi(/* Holding FN2 => FN1 at the same time */
         KC_AP2_USB, KC_AP2_BT1, KC_AP2_BT2, KC_AP2_BT3, KC_AP2_BT4, KC_AP2_BT_UNPAIR, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, KC_AP_WIFE, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, KC_AP_WIN, _______, _______, _______, _______, _______, KC_AP_LIN, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, KC_AP_MAC, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______),
 };
 // clang-format on
@@ -206,6 +198,10 @@ const qk_ucis_symbol_t ucis_symbol_table[] = UCIS_TABLE(
     UCIS_SYM("face",0x28, 0x20, 0x360, 0xB0, 0x20, 0x35F, 0x296, 0x20, 0x361, 0xB0, 0x29)  // ( ͠° ͟ʖ ͡°)
 );
 
+void matrix_init_user(void) {
+    set_unicode_input_mode(UC_LNX);
+}
+
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -214,10 +210,34 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // Do something when pressed
         uint8_t current_speed = rgb_matrix_get_speed();
         rgb_matrix_set_speed(current_speed + 51);
-      } else {
-        // Do something else when release
       }
       return false; // Skip all further processing of this key
+    case KC_AP_WIN:
+      if (record->event.pressed) {
+        default_layer_set(1 << _BASE_LAYER);
+        // requires installation of
+        // https://github.com/samhocevar/wincompose
+        // on Windows machine
+        set_unicode_input_mode(UC_WINC);
+      }
+      return false;
+    case KC_AP_LIN:
+      if (record->event.pressed) {
+        default_layer_set(1 << _BASE_LAYER);
+        set_unicode_input_mode(UC_LNX);
+      }
+      return false;
+    case KC_AP_MAC:
+      if (record->event.pressed) {
+        default_layer_set(1 << _BASE_LAYER);
+        set_unicode_input_mode(UC_MAC);
+      }
+      return false;
+    case KC_AP_WIFE:
+      if (record->event.pressed) {
+        default_layer_set(1 << _WIFE_LAYER);
+      }
+      return false;
     default:
       return true; // Process all other keycodes normally
   }
