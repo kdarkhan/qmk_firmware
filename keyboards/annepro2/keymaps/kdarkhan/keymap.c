@@ -72,30 +72,30 @@ enum tap_dance_codes {
     [_BASE_LAYER]  = LAYOUT_60_ansi(/* Base */
         KC_GRAVE, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL, KC_BSPC,
         KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC, KC_RBRC, LT(_TAP2_LAYER, KC_BSLS),
-        LT(_CAPS_LAYER, KC_ESC), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCOLON, KC_QUOT, KC_ENT,
+        LT(_CAPS_LAYER, KC_ESC), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT, KC_ENT,
         KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
         KC_LCTL, KC_LGUI, KC_LALT, KC_SPC, TT(_FN1_LAYER), LT(_FN2_LAYER, KC_APP), KC_RALT, TD(KC_AP_TD_RCTRL)),
     [_WIFE_LAYER]  = LAYOUT_60_ansi(/* Base */
         KC_GRAVE, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL, KC_BSPC,
         KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC, KC_RBRC, LT(_TAP2_LAYER, KC_BSLS),
-        LT(_CAPS_LAYER, KC_ESC), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCOLON, KC_QUOT, KC_ENT,
+        LT(_CAPS_LAYER, KC_ESC), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT, KC_ENT,
         KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_UP,
         KC_LCTL, KC_LGUI, KC_LALT, KC_SPC, TT(_FN1_LAYER), KC_LEFT, KC_DOWN, KC_RIGHT),
     [_CAPS_LAYER] = LAYOUT_60_ansi(/* Hold CapsLock */
         _______, _______, _______, _______, _______, KC_AUDIO_VOL_DOWN, KC_AUDIO_MUTE, KC_AUDIO_VOL_UP, KC_BRID, KC_BRIU, _______, _______, _______, KC_DELETE,
-        _______, _______, LCTL(KC_W), _______, LCTL(KC_R), LCTL(KC_T), _______, LCTL(KC_U), LCTL(KC_I), LCTL(KC_O), LCTL(KC_P), KC_HOME, KC_END, _______,
+        _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______, _______, _______, KC_HOME, KC_END, _______,
         _______, _______, _______, LCTL(KC_D), LCTL(KC_F), _______, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_PGUP, KC_PGDN, _______,
         _______, _______, _______, _______, LCTL(KC_V), LCTL(KC_B), _______, _______, _______, KC_INSERT, KC_DELETE, _______,
         _______, _______, _______, _______, _______, _______, _______, _______),
     [_FN1_LAYER]   = LAYOUT_60_ansi(/* FN1 */
-        _______, _______, _______, _______, _______, _______, _______, _______, KC_KP_ASTERISK, KC_NUMLOCK, KC_KP_0, KC_KP_MINUS, KC_KP_PLUS, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, KC_KP_ASTERISK, KC_NUM_LOCK, KC_KP_0, KC_KP_MINUS, KC_KP_PLUS, _______,
         _______, _______, _______, _______, _______, _______, _______, KC_KP_7, KC_KP_8, KC_KP_9, _______, _______, _______, _______,
         _______, _______, _______, KC_AP_WIN, _______, _______, _______, KC_KP_4, KC_KP_5, KC_KP_6, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_SLASH, KC_UP,
         _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_RIGHT),
     [_FN2_LAYER]   = LAYOUT_60_ansi(/* FN2 */
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_PSCREEN, KC_HOME, KC_END, RGB_TOG,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_PSCR, KC_HOME, KC_END, RGB_TOG,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_PGUP, KC_PGDN, RGB_MOD,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_VAI,
         _______, _______, _______, _______, TT(_FNX_LAYER), _______, _______, KC_AP_RGB_SPEED),
@@ -199,7 +199,7 @@ const qk_ucis_symbol_t ucis_symbol_table[] = UCIS_TABLE(
 );
 
 void matrix_init_user(void) {
-    set_unicode_input_mode(UC_LNX);
+    set_unicode_input_mode((uint8_t)UC_LINX);
 }
 
 
@@ -218,19 +218,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // requires installation of
         // https://github.com/samhocevar/wincompose
         // on Windows machine
-        set_unicode_input_mode(UC_WINC);
+        set_unicode_input_mode((uint8_t)UC_WINC);
       }
       return false;
     case KC_AP_LIN:
       if (record->event.pressed) {
         default_layer_set(1 << _BASE_LAYER);
-        set_unicode_input_mode(UC_LNX);
+        set_unicode_input_mode((uint8_t)UC_LINX);
       }
       return false;
     case KC_AP_MAC:
       if (record->event.pressed) {
         default_layer_set(1 << _BASE_LAYER);
-        set_unicode_input_mode(UC_MAC);
+        set_unicode_input_mode((uint8_t)UC_MAC);
       }
       return false;
     case KC_AP_WIFE:
