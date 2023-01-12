@@ -114,8 +114,8 @@ enum tap_dance_codes {
         _______, KC_MS_WH_DOWN, _______, KC_MS_WH_UP, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______),
     [_FNX_LAYER]   = LAYOUT_60_ansi(/* Holding FN2 => FN1 at the same time */
-        KC_AP2_USB, KC_AP2_BT1, KC_AP2_BT2, KC_AP2_BT3, KC_AP2_BT4, KC_AP2_BT_UNPAIR, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, KC_AP_WIFE, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        KC_AP2_USB, KC_AP2_BT1, KC_AP2_BT2, KC_AP2_BT3, KC_AP2_BT4, KC_AP2_BT_UNPAIR, _______, _______, _______, _______, _______, _______, _______, DB_TOGG,
+	_______, _______, KC_AP_WIFE, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         KC_AP_NO_ESC, _______, _______, KC_AP_WIN, _______, _______, _______, _______, _______, KC_AP_LIN, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, KC_AP_MAC, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______),
@@ -123,8 +123,9 @@ enum tap_dance_codes {
 // clang-format on
 
 void keyboard_post_init_user(void) {
-    ap2_led_enable();
-    ap2_led_set_profile(7);
+    // ap2_led_enable();
+    // ap2_led_set_profile(7);
+    debug_enable = false;
 }
 
 /*
@@ -168,6 +169,7 @@ bool led_update_user(led_t leds) {
     return true;
 }
 
+#ifdef UCIS_ENABLE
 void dance_cln_finished(qk_tap_dance_state_t *state, void *user_data) {
     if (state->count == 3) {
         // tap 3 times to start unicode input
@@ -176,6 +178,7 @@ void dance_cln_finished(qk_tap_dance_state_t *state, void *user_data) {
         register_code(KC_RCTL);
     }
 }
+#endif
 
 void dance_cln_reset(qk_tap_dance_state_t *state, void *user_data) {
     if (state->count != 3) {
@@ -184,10 +187,13 @@ void dance_cln_reset(qk_tap_dance_state_t *state, void *user_data) {
 }
 
 qk_tap_dance_action_t tap_dance_actions[] = {
+#ifdef UCIS_ENABLE
     [KC_AP_TD_RCTRL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_cln_finished, dance_cln_reset),
+#endif
 };
 
 
+#ifdef UCIS_ENABLE
 const qk_ucis_symbol_t ucis_symbol_table[] = UCIS_TABLE(
     UCIS_SYM("poop", 0x1F4A9),                  // 💩
     UCIS_SYM("rofl", 0x1F923),                  // 🤣
@@ -205,9 +211,12 @@ const qk_ucis_symbol_t ucis_symbol_table[] = UCIS_TABLE(
     UCIS_SYM("flip", 0x28, 0x256F, 0xB0, 0x25A1, 0xB0, 0x29, 0x256F, 0xFE35, 0x20, 0x253B, 0x2501, 0x253B),             // (╯°□°)╯︵ ┻━┻
     UCIS_SYM("face",0x28, 0x20, 0x360, 0xB0, 0x20, 0x35F, 0x296, 0x20, 0x361, 0xB0, 0x29)  // ( ͠° ͟ʖ ͡°)
 );
+#endif
 
 void matrix_init_user(void) {
+#ifdef UCIS_ENABLE
     set_unicode_input_mode((uint8_t)UC_LINX);
+#endif
 }
 
 
@@ -231,19 +240,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // requires installation of
         // https://github.com/samhocevar/wincompose
         // on Windows machine
+#ifdef UCIS_ENABLE
         set_unicode_input_mode((uint8_t)UC_WINC);
+#endif
       }
       return false;
     case KC_AP_LIN:
       if (record->event.pressed) {
         default_layer_set(1 << _BASE_LAYER);
+#ifdef UCIS_ENABLE
         set_unicode_input_mode((uint8_t)UC_LINX);
+#endif
       }
       return false;
     case KC_AP_MAC:
       if (record->event.pressed) {
         default_layer_set(1 << _BASE_LAYER);
+#ifdef UCIS_ENABLE
         set_unicode_input_mode((uint8_t)UC_MAC);
+#endif
       }
       return false;
     case KC_AP_WIFE:
