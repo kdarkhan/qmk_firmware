@@ -33,9 +33,6 @@ enum custom_codes {
   KC_AP_WIN = AP2_SAFE_RANGE,
   KC_AP_LIN,
   KC_AP_MAC,
-  KC_AP_WIFE,
-  KC_AP_NO_ESC,
-  KC_AP_RGB_SPEED,
 };
 
 enum tap_dance_codes {
@@ -106,7 +103,7 @@ enum tap_dance_codes {
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_PSCR, KC_HOME, KC_END, RGB_TOG,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_PGUP, KC_PGDN, RGB_MOD,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_VAI,
-        _______, _______, _______, _______, TT(_FNX_LAYER), _______, _______, KC_AP_RGB_SPEED),
+        _______, _______, _______, _______, TT(_FNX_LAYER), _______, _______, _______),
     [_TAP2_LAYER]   = LAYOUT_60_ansi(/* Hold |\ */
         KC_ESC,  KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, _______,
         _______, KC_MS_BTN1, KC_MS_UP, KC_MS_BTN2, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
@@ -114,9 +111,9 @@ enum tap_dance_codes {
         _______, KC_MS_WH_DOWN, _______, KC_MS_WH_UP, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______),
     [_FNX_LAYER]   = LAYOUT_60_ansi(/* Holding FN2 => FN1 at the same time */
-        KC_AP2_USB, KC_AP2_BT1, KC_AP2_BT2, KC_AP2_BT3, KC_AP2_BT4, KC_AP2_BT_UNPAIR, _______, _______, _______, _______, _______, _______, _______, DB_TOGG,
-	_______, _______, KC_AP_WIFE, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        KC_AP_NO_ESC, _______, _______, KC_AP_WIN, _______, _______, _______, _______, _______, KC_AP_LIN, _______, _______, _______,
+        KC_AP2_USB, KC_AP2_BT1, KC_AP2_BT2, KC_AP2_BT3, KC_AP2_BT4, KC_AP2_BT_UNPAIR, _______, _______, _______, RGB_SPD, RGB_SPI, _______, _______, DB_TOGG,
+	_______, _______, DF(_WIFE_LAYER), _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        DF(_NO_ESC_LAYER), _______, _______, KC_AP_WIN, _______, _______, _______, _______, _______, KC_AP_LIN, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, KC_AP_MAC, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______),
 };
@@ -222,18 +219,6 @@ void matrix_init_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case KC_AP_RGB_SPEED:
-      if (record->event.pressed) {
-        // Do something when pressed
-        uint8_t current_speed = rgb_matrix_get_speed();
-        rgb_matrix_set_speed(current_speed + 51);
-      }
-      return false; // Skip all further processing of this key
-    case KC_AP_NO_ESC:
-      if (record->event.pressed) {
-        default_layer_set(1 << _NO_ESC_LAYER);
-      }
-      return false;
     case KC_AP_WIN:
       if (record->event.pressed) {
         default_layer_set(1 << _BASE_LAYER);
@@ -259,11 +244,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #ifdef UCIS_ENABLE
         set_unicode_input_mode((uint8_t)UC_MAC);
 #endif
-      }
-      return false;
-    case KC_AP_WIFE:
-      if (record->event.pressed) {
-        default_layer_set(1 << _WIFE_LAYER);
       }
       return false;
     default:
