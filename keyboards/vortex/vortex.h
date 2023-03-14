@@ -26,6 +26,8 @@ typedef struct __attribute__((__packed__)) {
 } ble_capslock_t;
 extern ble_capslock_t ble_capslock;
 
+
+
 // Matrix keymap
 // clang-format off
 #define LAYOUT_60_ansi( \
@@ -55,6 +57,26 @@ extern ble_capslock_t ble_capslock;
     /* ROW3  */ { K20,   K21,   K22,   K23,   K24,   K25,   K26,   K27,   K28,   K29,   K2A,   K2B,   K2C,   KC_NO}, \
     /* ROW4  */ { K30,   K31,   K32,   K33,   K34,   K35,   K36,   K37,   K38,   K39,   K3A,   K3B,   K3C,   KC_NO}, \
     /* ROW5  */ { K40,   KC_NO, K42,   K43,   KC_NO, KC_NO, K46,   KC_NO, KC_NO, K49,   K4A,   K4B,   K4C,   KC_NO}, \
+}
+
+
+#define LAYOUT_75_ansi( \
+    K00, K01, K02, K03, K04, K05, K06, K07, K08, K09, K0A, K0B, K0C, K0D, K0F, \
+    K10, K11, K12, K13, K14, K15, K16, K17, K18, K19, K1A, K1B, K1C, K1D, K1F, \
+    K20, K21, K22, K23, K24, K25, K26, K27, K28, K29, K2A, K2B, K2C, K2D, K2F, \
+    K30, K31, K32, K33, K34, K35, K36, K37, K38, K39, K3A, K3B, K3C, K3D,      \
+    K40, K41, K42, K43, K44, K45, K46, K47, K48, K49, K4A, K4B, K4C, K4D,      \
+    K50, K51, K52,           K53,           K54, K55, K56, K57, K58, K59 \
+) { \
+    /*            COL1   COL2   COL3   COL4   COL5   COL6   COL7   COL8   COL9   COL10  COL11  */ \
+    /* ROW1  */ { K00,   K01,   K02,   K03,   K04,   K05,   K06,   K07,   K08,   K09,   K0A,   }, \
+    /* ROW2  */ { K10,   K11,   K12,   K13,   K14,   K15,   K16,   K17,   K18,   K19,   K1A,   }, \
+    /* ROW3  */ { K20,   K21,   K22,   K23,   K24,   K25,   K26,   K27,   K28,   K29,   K2A,   }, \
+    /* ROW4  */ { K30,   K31,   K32,   K33,   K34,   K35,   K36,   K37,   K38,   K39,   K3A,   }, \
+    /* ROW5  */ { K40,   KC_NO, K42,   K43,   KC_NO, KC_NO, K46,   KC_NO, KC_NO, K49,   K4A,   }, \
+    /* ROW6  */ { K40,   KC_NO, K42,   K43,   KC_NO, KC_NO, K46,   KC_NO, KC_NO, K49,   K4A,   }, \
+    /* ROW7  */ { K40,   KC_NO, K42,   K43,   KC_NO, KC_NO, K46,   KC_NO, KC_NO, K49,   K4A,   }, \
+    /* ROW8  */ { K40,   KC_NO, K42,   K43,   KC_NO, KC_NO, K46,   KC_NO, KC_NO, K49,   K4A,   }, \
 }
 // clang-format on
 
