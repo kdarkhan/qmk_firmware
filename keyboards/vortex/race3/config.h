@@ -20,6 +20,9 @@
 #include "pin_defs.h"
 #include "config_led.h"
 
+
+#define DIODE_DIRECTION ROW2COL
+
 // key matrix size
 #define MATRIX_ROWS 8
 #define MATRIX_COLS 11
