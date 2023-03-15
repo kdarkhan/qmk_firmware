@@ -1,13 +1,14 @@
 # MCU
-MCU = cortex-m0plus
-ARMV = 6
+MCU = cortex-m3
+ARMV = 7
 USE_FPU = no
 MCU_FAMILY = HT32
-MCU_SERIES = HT32F523xx
+MCU_SERIES = HT32F165x
+# TODO darkhan
 MCU_LDSCRIPT = HT32F52342_ANNEPRO2
-MCU_STARTUP = ht32f523xx
+MCU_STARTUP = ht32f165x
 
-BOARD = VORTEX_RACE_3
+BOARD = RACE_3
 
 # Bootloader selection
 BOOTLOADER = custom
@@ -27,15 +28,15 @@ RGBLIGHT_ENABLE = no        # Enable keyboard RGB underglow
 AUDIO_ENABLE = no           # Audio output
 
 # Wear-levelling driver
-EEPROM_DRIVER = wear_leveling
-WEAR_LEVELING_DRIVER = spi_flash
+# EEPROM_DRIVER = wear_leveling
+# WEAR_LEVELING_DRIVER = spi_flash
 
 # Custom RGB matrix handling
-RGB_MATRIX_ENABLE = yes
+RGB_MATRIX_ENABLE = no
 RGB_MATRIX_DRIVER = custom
 
 # Keys
-CUSTOM_MATRIX = lite
+# CUSTOM_MATRIX = lite
 KEY_LOCK_ENABLE = no
 
 # Other features
@@ -45,10 +46,4 @@ VIRTSER_ENABLE = no
 COMBO_ENABLE = no
 
 # Anne Pro 2
-SRC = \
-	matrix.c \
-	annepro2_ble.c \
-	ap2_led.c \
-	protocol.c \
-	rgb_driver.c \
-	config_led.c
+# SRC = \

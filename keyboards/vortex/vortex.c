@@ -15,32 +15,31 @@
  */
 
 #include "hal.h"
-#include "cortex.h"
-#include "spi_master.h"
+/* #include "cortex.h" */
 
 #define RAM_MAGIC_LOCATION 0x20001ffc
 #define IAP_MAGIC_VALUE 0x0000fab2
 
-void bootloader_jump(void) {
-    // Send msg to shine to boot into IAP
-    ap2_set_IAP();
+/* void bootloader_jump(void) { */
+/*     // Send msg to shine to boot into IAP */
+/*     ap2_set_IAP(); */
 
-    // wait for shine to boot into IAP
-    wait_ms(15);
+/*     // wait for shine to boot into IAP */
+/*     wait_ms(15); */
 
-    // Load ble into IAP
-    annepro2_ble_bootload();
-    wait_ms(15);
+/*     // Load ble into IAP */
+/*     annepro2_ble_bootload(); */
+/*     wait_ms(15); */
 
-    // Magic key to set keyboard to IAP
-    // It’s from reversing original boot loader
-    // If value is that it stays in boot loader aka IAP
-    *((uint32_t *)RAM_MAGIC_LOCATION) = IAP_MAGIC_VALUE;
+/*     // Magic key to set keyboard to IAP */
+/*     // It’s from reversing original boot loader */
+/*     // If value is that it stays in boot loader aka IAP */
+/*     *((uint32_t *)RAM_MAGIC_LOCATION) = IAP_MAGIC_VALUE; */
 
-    // Load the main MCU into IAP
-    __disable_irq();
-    NVIC_SystemReset();
-}
+/*     // Load the main MCU into IAP */
+/*     __disable_irq(); */
+/*     NVIC_SystemReset(); */
+/* } */
 
 /* void keyboard_pre_init_kb(void) { */
 /*     // Start LED UART */

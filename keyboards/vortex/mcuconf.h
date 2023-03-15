@@ -17,7 +17,8 @@
 
 #include "nvic.h"
 
-#define HT32F52342_MCUCONF
+/* #define HT32F52342_MCUCONF */
+#define HT32F165x_MCUCONF
 
 /*
  * HAL driver system settings.
@@ -48,10 +49,10 @@
  * Peripheral driver settings
  */
 
-#define HT32_SERIAL_USE_USART0 TRUE
+#define HT32_SERIAL_USE_USART0 FALSE
 #define HT32_USART0_IRQ_PRIORITY 6
 
-#define HT32_SERIAL_USE_USART1 TRUE
+#define HT32_SERIAL_USE_USART1 FALSE
 #define HT32_USART1_IRQ_PRIORITY 7
 
 /*
@@ -65,6 +66,6 @@
  * SPI driver setting
  */
 
-#define HT32_SPI_USE_SPI1 TRUE
+#define HT32_SPI_USE_SPI1 FALSE
 #define HT32_SPI1_IRQ_PRIORITY 9
 

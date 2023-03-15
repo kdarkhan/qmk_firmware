@@ -22,9 +22,11 @@
 /*
  * Board identifier.
  */
-#define BOARD_NAME "Anne Pro 2"
+#define BOARD_NAME "Vortex Race 3"
 
-#define HT32F52342
+// #define HT32F52342
+#define HT32F165x
+#define HT32F1654
 
 #define FLASH_SIZE (0x10000 - 0x4000)  // 64kB - 16kB
 
