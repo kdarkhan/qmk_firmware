@@ -4,7 +4,7 @@
 
 #define RGBLIGHT_SLEEP yes
 
-#define TAP_CODE_DELAY 10
+#define TAP_CODE_DELAY 50
 
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
