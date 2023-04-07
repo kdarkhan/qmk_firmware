@@ -11,6 +11,8 @@ MCU_STARTUP = ht32f165x
 
 BOARD = RACE_3
 
+OPT_DEFS = -DCORTEX_VTOR_INIT=0x3400
+
 # Bootloader selection
 BOOTLOADER = custom
 PROGRAM_CMD = annepro2_tools --boot $(BUILD_DIR)/$(TARGET).bin
@@ -30,6 +32,7 @@ AUDIO_ENABLE = no           # Audio output
 
 # Wear-levelling driver
 # EEPROM_DRIVER = wear_leveling
+EEPROM_DRIVER = transient
 # WEAR_LEVELING_DRIVER = spi_flash
 
 # Custom RGB matrix handling
@@ -47,5 +50,4 @@ VIRTSER_ENABLE = no
 COMBO_ENABLE = no
 
 # Vortex
-SRC = \
-  matrix.c
+# SRC = matrix.c

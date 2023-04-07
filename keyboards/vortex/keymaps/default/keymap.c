@@ -15,6 +15,7 @@
   */
 
 #include "keycodes.h"
+#include "print.h"
 #include QMK_KEYBOARD_H
 
 enum anne_pro_layers {
@@ -62,3 +63,13 @@ enum anne_pro_layers {
 )
 };
 // clang-format on
+
+void keyboard_post_init_user(void) {
+  // Customise these values to desired behaviour
+  debug_enable=true;
+  debug_matrix=true;
+  debug_keyboard=true;
+  dprint("string");
+  //debug_keyboard=true;
+  //debug_mouse=true;
+}
