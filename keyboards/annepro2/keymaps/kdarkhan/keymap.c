@@ -132,12 +132,12 @@ enum anne_pro_layers {
 
 void keyboard_post_init_user(void) {
     // debug can still be enabled by using bootmagic
-    debug_enable = false;
+    /* debug_enable = false; */
 }
 
 // The function to handle the caps lock logic
 // It's called after the capslock changes state or after entering layers 1 and 2.
-bool led_update_user(led_t leds) {
+bool led_update_user_unused(led_t leds) {
     if (leds.caps_lock) {
         // Set the caps-lock to red
         const ap2_led_t color = {.p.red = 0xff, .p.green = 0x00, .p.blue = 0x00, .p.alpha = 0xff};

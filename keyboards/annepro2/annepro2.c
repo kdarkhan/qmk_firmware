@@ -94,16 +94,17 @@ void keyboard_post_init_kb(void) {
     sdStart(&SD1, &ble_uart_config);
     annepro2_ble_startup();
 
+    // Give the send uart thread some time to
+    // send out the queue before we read back
+    wait_ms(100);
+
+    // loop to clear out receive buffer from ble wakeup
+    while (!sdGetWouldBlock(&SD1)) sdGet(&SD1);
+
     #ifdef RGB_MATRIX_ENABLE
     ap2_led_set_manual_control(1);
     ap2_led_enable();
     #endif
-
-    // Give the send uart thread some time to
-    // send out the queue before we read back
-    wait_ms(100);
-    // loop to clear out receive buffer from ble wakeup
-    while (!sdGetWouldBlock(&SD1)) sdGet(&SD1);
 
     keyboard_post_init_user();
 }
