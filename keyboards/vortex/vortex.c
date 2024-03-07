@@ -25,8 +25,8 @@
 #define RESET_BL_MAGIC  0x55aafaf5U
 #define NAME_SLUG       "vortex/race3"
 
-const uint8_t firmware_id[] __attribute__ ((section (".id.firmware"))) =
-    "qmk_pok3r;" NAME_SLUG ";" QMK_VERSION ";" QMK_BUILDDATE;
+//const uint8_t firmware_id[] __attribute__ ((section (".id.firmware"))) =
+//    "qmk_pok3r;" NAME_SLUG ";" QMK_VERSION ";" QMK_BUILDDATE;
 
 void bootloader_jump(void) {
 

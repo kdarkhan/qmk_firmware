@@ -21,20 +21,20 @@
 #include "config_led.h"
 
 
-#define DIODE_DIRECTION ROW2COL
+// #define DIODE_DIRECTION ROW2COL
 
 // key matrix size
-#define MATRIX_ROWS 8
-#define MATRIX_COLS 11
+// #define MATRIX_ROWS 8
+// #define MATRIX_COLS 11
 // layer size: MATRIX_ROWS * MATRIX_COLS * sizeof(uint16_t) = 140 bytes
 
 // outputs (rows are pulled low)
-#define MATRIX_ROW_PINS \
-    { C9, A5, A6, A7, C11, C13, C14, C15 }
+// #define MATRIX_ROW_PINS \ -
+//    { C9, A5, A6, A7, C11, C13, C14, C15 }
 
 // inputs (columns are sampled)
-#define MATRIX_COL_PINS \
-    { A3, A4, B10, D0, B11, A11, A0, A1, A2, D1, C10 }
+//#define MATRIX_COL_PINS \ -
+//    { A3, A4, B10, D0, B11, A11, A0, A1, A2, D1, C10 }
 
 // Obins stock firmware has something similar to this already enabled, but disabled by default in QMK
 #define PERMISSIVE_HOLD

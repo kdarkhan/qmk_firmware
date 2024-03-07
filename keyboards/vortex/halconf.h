@@ -22,6 +22,7 @@
 #pragma once
 
 /* #define HAL_USE_SERIAL TRUE */
+#define HAL_USE_SERIAL FALSE
 
 // #define SERIAL_USB_BUFFERS_SIZE 256
 
