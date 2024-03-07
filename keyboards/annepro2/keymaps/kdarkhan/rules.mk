@@ -6,8 +6,8 @@ TAP_DANCE_ENABLE = no
 UCIS_ENABLE = no
 
 # fix usb sleep
-NO_USB_STARTUP_CHECK = no
-WAIT_FOR_USB = yes
+# NO_USB_STARTUP_CHECK = no
+# WAIT_FOR_USB = yes
 
 # hid_listen and debugging stuff
 # CONSOLE_ENABLE = yes

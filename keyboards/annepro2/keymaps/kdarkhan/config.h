@@ -2,12 +2,13 @@
 
 #define UCIS_MAX_CODE_POINTS 12
 
-#define RGBLIGHT_SLEEP yes
-
 #define TAP_CODE_DELAY 50
 
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
+#define RGB_MATRIX_SLEEP // turn off effects when suspended
+
 //define DEBUG_MATRIX_SCAN_RATE
 
-//#define USB_POLLING_INTERVAL_MS 10
+// This is needed in order for keyboard sleep to work
+/* #define USB_POLLING_INTERVAL_MS 10 */
