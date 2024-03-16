@@ -6,4 +6,5 @@
 
 #ifdef OLED_ENABLE
     #define OLED_TIMEOUT 120000
+    #define OLED_UPDATE_INTERVAL 100
 #endif
