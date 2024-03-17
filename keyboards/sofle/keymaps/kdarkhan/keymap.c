@@ -17,6 +17,13 @@
 
 #include QMK_KEYBOARD_H
 
+
+// enum encoder_state { vol_page, vol_hor,  hor_ver, vol_bri};
+// static encoder_state cur_enc_state = vol_page;
+enum my_keycodes {
+  MY_KC_ENC = SAFE_RANGE,
+};
+
 #ifdef ENCODER_MAP_ENABLE
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [0] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_PGDN, KC_PGUP) },
@@ -62,11 +69,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [0] = LAYOUT(
-  KC_GRV,         KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                       KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_MINS,
-  LCTL_T(KC_TAB),  KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  RCTL_T(KC_BSLS),
-  LSFT_T(KC_ESC), KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                       KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,  RSFT_T(KC_QUOT),
-  KC_LGUI,        KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE,     _______, KC_N,    KC_M,    KC_COMM,  KC_DOT, KC_SLSH,  KC_RGUI,
-                          KC_MENU, KC_LALT, MO(1), KC_SPACE, KC_BSPC,    KC_RALT, KC_ENT,  KC_BSPC, KC_RALT, MO(2)
+  KC_GRV,         KC_1,          KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,             KC_MINS,
+  LT(1, KC_TAB),  KC_Q,          KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,             LT(1, KC_BSLS),
+  LSFT_T(KC_ESC), LCTL_T(KC_A),  KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L,    RCTL_T(KC_SCLN),  RSFT_T(KC_QUOT),
+  KC_LALT,        KC_Z,          KC_X,    KC_C,    KC_V,    KC_B,     KC_MUTE,   _______, KC_N,    KC_M,    KC_COMM,  KC_DOT, KC_SLSH,          KC_RALT,
+                                 KC_MENU, KC_LALT, MO(1),   KC_SPACE, KC_LGUI,   KC_BSPC, KC_ENT,  MO(1),   KC_MENU, MO(2)
 ),
 /*
  * CAPS HELD
@@ -89,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_UNDO,  KC_WREF,  KC_BTN1,  KC_MS_U,  KC_BTN2, _______,                      KC_CIRC,    KC_LBRC,  KC_RBRC,  KC_LCBR,  KC_RCBR,   KC_F12,
   KC_CAPS,  KC_WHOM,  KC_MS_L,  KC_MS_D,  KC_MS_R, _______,                      KC_LEFT,    KC_DOWN,  KC_UP,    KC_RGHT,  KC_DEL,   KC_BSPC,
   KC_WBAK,  KC_WFWD,  KC_WH_D,  _______,  KC_WH_U, _______, _______,    _______, KC_ASTR,    KC_LPRN,  KC_RPRN,  KC_AMPR,  KC_EQL,  _______,
-                KC_MPRV,        KC_MPLY,  KC_MNXT, _______, KC_DEL,     _______, _______, _______, KC_HOME, KC_END
+                KC_MPRV,        KC_MPLY,  KC_MNXT, _______, _______,    KC_DEL,  _______, _______, KC_HOME, KC_END
 ),
 /* LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.
