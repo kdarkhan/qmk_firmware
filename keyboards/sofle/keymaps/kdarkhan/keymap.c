@@ -51,6 +51,16 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 }
 #endif
 
+enum sofle_layers {
+    /* _M_XYZ = Mac Os, _W_XYZ = Win/Linux */
+    _QWERTY,
+    _COLEMAK,
+    _ADJ1,
+    _ADJ2,
+    _ADJ3,
+    _ADJ4,
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
  * QWERTY
@@ -68,12 +78,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
 
-[0] = LAYOUT(
-  KC_GRV,         KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,      KC_MINS,
-  LT(1, KC_TAB),  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,      LT(3, KC_BSLS),
-  LT(2, KC_ESC),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,   KC_BSPC,
-  KC_LALT,        KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,     KC_MUTE,   _______, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,   KC_RALT,
-                  KC_LGUI, KC_LALT, KC_LCTL, KC_ENT,  MO(1),                        MO(1),   KC_SPC,  KC_RCTL, KC_RALT, KC_RGUI
+[_QWERTY] = LAYOUT(
+  KC_GRV,            KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,      KC_7,    KC_8,    KC_9,    KC_0,      KC_MINS,
+  LT(_ADJ1, KC_TAB), KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,      KC_U,    KC_I,    KC_O,    KC_P,      LT(_ADJ1, KC_BSLS),
+  LSFT_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,      KC_J,    KC_K,    KC_L,    KC_SCLN,   RSFT_T(KC_QUOT),
+  KC_DEL,            KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,     KC_MUTE,   _______, KC_N,      KC_M,    KC_COMM, KC_DOT,  KC_SLSH,   KC_BSPC,
+                     KC_LGUI, KC_LALT, KC_LCTL, KC_SPC,  MO(_ADJ1),                    MO(_ADJ1), KC_ENT,  KC_RCTL, KC_RALT, KC_RGUI
+),
+[_COLEMAK] = LAYOUT(
+  KC_GRV,            KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,      KC_7,    KC_8,    KC_9,    KC_0,      KC_MINS,
+  LT(_ADJ1, KC_TAB), KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,      KC_L,    KC_U,    KC_Y,    KC_SCLN,   LT(3, KC_BSLS),
+  LSFT_T(KC_ESC),    KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                         KC_M,      KC_N,    KC_E,    KC_I,    KC_O,      RSFT_T(KC_QUOT),
+  KC_DEL,            KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,     KC_MUTE,   _______, KC_K,      KC_H,    KC_COMM, KC_DOT,  KC_SLSH,   KC_BSPC,
+                     KC_LGUI, KC_LALT, KC_LCTL, KC_SPC,  MO(_ADJ1),                    MO(_ADJ1), KC_ENT,  KC_RCTL, KC_RALT, KC_RGUI
 ),
 /*
  * CAPS HELD
@@ -91,12 +108,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `-----------------------------------'           '------''---------------------------'
  */
 
-[1] = LAYOUT(
+[_ADJ1] = LAYOUT(
   _______,  KC_F1,    KC_F2,    KC_F3,    KC_F4,   KC_F5,                        KC_F6,      KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,
   KC_UNDO,  KC_WREF,  _______,  KC_QUOT,  KC_DQUO, _______,                      KC_CIRC,    KC_LBRC,  KC_RBRC,  KC_LCBR,  KC_RCBR,  KC_F12,
   KC_CAPS,  KC_WHOM,  _______,  KC_UNDS,  KC_PLUS, _______,                      KC_LEFT,    KC_DOWN,  KC_UP,    KC_RGHT,  _______,  _______,
   KC_WBAK,  KC_WFWD,  _______,  _______,  _______, _______, _______,    _______, KC_ASTR,    KC_LPRN,  KC_RPRN,  KC_AMPR,  KC_EQL,  _______,
-                      _______,  _______,  _______, _______, _______,    _______, _______, _______, KC_HOME, KC_END
+            _______,  _______,  _______,  _______, MO(_ADJ2),                    MO(_ADJ2),  _______,  _______,  KC_HOME, KC_END
 ),
 /* LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -113,12 +130,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
 
-[2] = LAYOUT(
-  _______,  _______,  _______,  _______,  _______, _______,                      _______,    _______,  _______,  _______, _______,  _______,
-  KC_TAB,  KC_INS,    KC_APP,   _______,  _______, _______,                      _______,    _______,  _______,  _______, _______,  KC_BSLS,
-  _______,  KC_PSCR,  _______,  _______,  _______, _______,                      KC_LEFT,    KC_DOWN,  KC_UP,    KC_RGHT, _______,  KC_DEL,
-  _______,  _______,  _______,  _______,  _______, _______, _______,    _______, _______,    _______,  _______,  _______, _______,  _______,
-                      _______,  _______,  _______, _______, _______,    _______, _______,    _______,  _______,  _______
+[_ADJ2] = LAYOUT(
+  _______,  _______,  _______,  _______,      _______, _______,                      _______,    _______,  _______,  _______, _______,  _______,
+  KC_TAB,  KC_INS,    KC_APP,   _______,      _______, _______,                      _______,    _______,  _______,  _______, _______,  KC_BSLS,
+  _______,  KC_PSCR,  _______,  DF(_QWERTY),  _______, _______,                      KC_LEFT,    KC_DOWN,  KC_UP,    KC_RGHT, _______,  KC_DEL,
+  _______,  _______,  _______,  DF(_COLEMAK), _______, _______, _______,    _______, _______,    _______,  _______,  _______, _______,  _______,
+            _______,  _______,  _______,      _______, _______,                      _______,    _______,  _______,  _______, _______
 ),
 /* RAISE
  * ,----------------------------------------.                    ,-----------------------------------------.
@@ -134,7 +151,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            |      |      |      |      |/       /         \      \ |      |      |      |      |
  *            `----------------------------------'           '------''---------------------------'
  */
-[3] = LAYOUT(
+[_ADJ3] = LAYOUT(
   _______,  _______,  _______,  _______,  _______, _______,                      _______,    _______,    _______,    _______,    _______,  _______,
   _______,  _______,  KC_MS_BTN1,  KC_MS_U, KC_MS_BTN2, _______,                      _______,    _______,    _______,    _______, _______,  _______,
   _______,  _______,  KC_MS_L,  KC_MS_D,  KC_MS_R, _______,                      _______,    _______,    _______,    _______,    _______,  _______,
@@ -159,7 +176,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `-----------------------------------'           '------''---------------------------'
  */
 
-[4] = LAYOUT(
+[_ADJ4] = LAYOUT(
   _______,  _______,  _______,  _______,  _______, _______,                      _______,    _______,    _______,    _______,    _______,  _______,
   _______,  _______,  _______,  _______,  _______, _______,                      _______,    _______,    _______,    _______, _______,  _______,
   _______,  _______,  _______,  _______,  _______, _______,                      _______,    _______,    _______,    _______,    _______,  _______,
@@ -479,11 +496,26 @@ bool process_detected_host_os_kb(os_variant_t detected_os) {
   return true;
 }
 
+static uint8_t default_layer = _QWERTY;
+layer_state_t default_layer_state_set_user(layer_state_t state) {
+    switch(biton32(state)){
+        case _QWERTY:
+            default_layer = _QWERTY;
+            break;
+        case _COLEMAK:
+            default_layer = _COLEMAK;
+            break;
+    };
+    return state;
+}
+
 bool oled_led_task_user(void) {
   oled_write_ln("LAY:", false);
+  oled_write_ln(default_layer == _QWERTY ? " qwe" : " col", false);
 
   // Print current layer
   switch (get_highest_layer(layer_state)) {
+
     case 0:
       oled_write_ln(" bas", false);
       break;
