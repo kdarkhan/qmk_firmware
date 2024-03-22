@@ -66,6 +66,9 @@ enum sofle_layers {
     _ADJ4,
 };
 
+
+
+// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
  * QWERTY
@@ -189,6 +192,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 _______,_______,_______,_______, _______,      _______,  _______, _______, _______, _______
 ),
 };
+// clang-format on
 
 #ifdef OLED_ENABLE
 #include "matrix.h"
