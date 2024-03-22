@@ -33,6 +33,11 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [4] = { ENCODER_CCW_CW(_______, _______),           ENCODER_CCW_CW(_______, _______) }
 };
 #else
+enum enc_layer {
+    ENC_DEFAULT = 0,
+};
+// static uint8_t current_enc_layer = 0;
+
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) { /* First encoder */
         if (clockwise) {
@@ -80,17 +85,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_QWERTY] = LAYOUT(
   KC_GRV,            KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,      KC_7,    KC_8,    KC_9,    KC_0,      KC_MINS,
-  LT(_ADJ1, KC_TAB), KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,      KC_U,    KC_I,    KC_O,    KC_P,      LT(_ADJ1, KC_BSLS),
-  LSFT_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,      KC_J,    KC_K,    KC_L,    KC_SCLN,   RSFT_T(KC_QUOT),
-  KC_DEL,            KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,     KC_MUTE,   _______, KC_N,      KC_M,    KC_COMM, KC_DOT,  KC_SLSH,   KC_BSPC,
-                     KC_LGUI, KC_LALT, KC_LCTL, KC_SPC,  MO(_ADJ1),                    MO(_ADJ1), KC_ENT,  KC_RCTL, KC_RALT, KC_RGUI
+  LT(_ADJ1, KC_TAB), KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,      KC_U,    KC_I,    KC_O,    KC_P,      LT(_ADJ3, KC_BSLS),
+  LT(_ADJ1, KC_ESC), KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,      KC_J,    KC_K,    KC_L,    KC_SCLN,   LT(_ADJ3, KC_QUOT),
+  KC_LSFT,           KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,     KC_MUTE,   _______, KC_N,      KC_M,    KC_COMM, KC_DOT,  KC_SLSH,   KC_RSFT,
+                     KC_LGUI, KC_LALT, KC_LCTL, KC_SPC,  MO(_ADJ1),                    KC_BSPC,   KC_ENT,  KC_RCTL, KC_RALT, KC_RGUI
 ),
 [_COLEMAK] = LAYOUT(
   KC_GRV,            KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,      KC_7,    KC_8,    KC_9,    KC_0,      KC_MINS,
-  LT(_ADJ1, KC_TAB), KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,      KC_L,    KC_U,    KC_Y,    KC_SCLN,   LT(3, KC_BSLS),
-  LSFT_T(KC_ESC),    KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                         KC_M,      KC_N,    KC_E,    KC_I,    KC_O,      RSFT_T(KC_QUOT),
-  KC_DEL,            KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,     KC_MUTE,   _______, KC_K,      KC_H,    KC_COMM, KC_DOT,  KC_SLSH,   KC_BSPC,
-                     KC_LGUI, KC_LALT, KC_LCTL, KC_SPC,  MO(_ADJ1),                    MO(_ADJ1), KC_ENT,  KC_RCTL, KC_RALT, KC_RGUI
+  LT(_ADJ1, KC_TAB), KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,      KC_L,    KC_U,    KC_Y,    KC_SCLN,   LT(_ADJ3, KC_BSLS),
+  LT(_ADJ1, KC_ESC), KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                         KC_M,      KC_N,    KC_E,    KC_I,    KC_O,      LT(_ADJ1, KC_QUOT),
+  KC_LSFT,           KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,     KC_MUTE,   _______, KC_K,      KC_H,    KC_COMM, KC_DOT,  KC_SLSH,   KC_RSFT,
+                     KC_LGUI, KC_LALT, KC_LCTL, KC_SPC,  MO(_ADJ1),                    KC_BSPC,   KC_ENT,  KC_RCTL, KC_RALT, KC_RGUI
 ),
 /*
  * CAPS HELD
@@ -152,11 +157,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
 [_ADJ3] = LAYOUT(
-  _______,  _______,  _______,  _______,  _______, _______,                      _______,    _______,    _______,    _______,    _______,  _______,
-  _______,  _______,  KC_MS_BTN1,  KC_MS_U, KC_MS_BTN2, _______,                      _______,    _______,    _______,    _______, _______,  _______,
-  _______,  _______,  KC_MS_L,  KC_MS_D,  KC_MS_R, _______,                      _______,    _______,    _______,    _______,    _______,  _______,
-  _______,  _______,  KC_WH_D,  _______,  KC_WH_U, _______, _______,      _______,_______,    _______, _______,  _______, _______,  _______,
-                      KC_MPRV,  KC_MPLY,  KC_MNXT, _______, _______,      _______,  _______, _______, _______, _______
+  _______,  _______,  _______,     _______,    _______,    _______,                      _______,    _______,  _______,   _______, _______,  _______,
+  _______,  _______,  KC_MS_BTN1,  KC_MS_U,    KC_MS_BTN2, _______,                      _______,    _______,  _______,   _______, _______,  _______,
+  _______,  _______,  KC_MS_L,     KC_MS_D,    KC_MS_R,    _______,                      _______,    _______,  _______,   _______, _______,  _______,
+  _______,  _______,  KC_WH_D,     _______,    KC_WH_U,    _______, _______,    _______, _______,    _______,  _______,   _______, _______,  _______,
+                      KC_MPRV,     KC_MPLY,    KC_MNXT,    _______, _______,    _______, _______,    _______,  _______,   _______
 ),
 
 
@@ -556,8 +561,14 @@ bool oled_led_task_user(void) {
   }
 
   led_t led_usb_state = host_keyboard_led_state();
-  oled_write_ln("\nCAP:", false);
-  oled_write_ln(led_usb_state.caps_lock ? " yes" : " no", false);
+  // If caps lock is on, then blink CAPS text
+  if (led_usb_state.caps_lock) {
+    oled_write_ln((timer_read32() % 1000 > 500) ? "\nCAP:\n yes" : "\n    \n  ", false);
+  } else {
+    oled_write_ln("\nCAP:\n no", false);
+  }
+
+  // oled_write_ln(led_usb_state.caps_lock ? " yes" : " no", false);
   oled_write_ln("\nNUM:", false);
   oled_write_ln(led_usb_state.num_lock ? " yes" : " no", false);
 
