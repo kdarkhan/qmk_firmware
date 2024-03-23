@@ -3,7 +3,8 @@
 // enum encoder_state { vol_page, vol_hor,  hor_ver, vol_bri};
 // static encoder_state cur_enc_state = vol_page;
 enum my_keycodes {
-  MY_KC_ENC = SAFE_RANGE,
+  MC_ENC1 = SAFE_RANGE,
+  MC_ENC2,
 };
 
 #ifdef ENCODER_MAP_ENABLE
@@ -14,24 +15,43 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [3] = {ENCODER_CCW_CW(_______, _______), ENCODER_CCW_CW(_______, _______)},
     [4] = {ENCODER_CCW_CW(_______, _______), ENCODER_CCW_CW(_______, _______)}};
 #else
-enum enc_layer {
-  ENC_DEFAULT = 0,
+enum enc1_layer {
+  ENC1_VOL = 0,
+  ENC1_BRI,
+  ENC1_MOUSE,
+  ENC1_MOUSE_SCROLL,
+  ENC1_END
 };
-// static uint8_t current_enc_layer = 0;
+
+enum enc2_layer {
+  ENC2_LEFT_RIGHT = 0,
+  ENC2_PAGE,
+  ENC2_MOUSE,
+  ENC2_MOUSE_SCROLL,
+  ENC2_END,
+};
+static uint8_t current_enc1_layer = 0;
+static uint8_t current_enc2_layer = 0;
+
+const static uint16_t enc1_map[ENC1_END][3] = {
+    [0] = {KC_VOLD, KC_VOLU, KC_MUTE},
+    [1] = {KC_BRID, KC_BRIU, KC_MUTE},
+    [2] = {KC_MS_L, KC_MS_R, KC_MS_BTN1},
+    [3] = {KC_WH_D, KC_WH_U, KC_MS_BTN1},
+};
+
+const static uint16_t enc2_map[ENC2_END][3] = {
+    [0] = {KC_LEFT, KC_RIGHT, KC_UP},
+    [1] = {KC_PGDN, KC_PGUP, KC_HOME},
+    [2] = {KC_MS_D, KC_MS_U, KC_MS_BTN2},
+    [3] = {KC_WH_L, KC_WH_R, KC_MS_BTN2},
+};
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
   if (index == 0) { /* First encoder */
-    if (clockwise) {
-      tap_code(KC_VOLU);
-    } else {
-      tap_code(KC_VOLD);
-    }
+    tap_code(enc1_map[current_enc1_layer][clockwise]);
   } else { /* Second encoder */
-    if (clockwise) {
-      tap_code(KC_RGHT);
-    } else {
-      tap_code(KC_LEFT);
-    }
+    tap_code(enc2_map[current_enc2_layer][clockwise]);
   }
   return false;
 }
@@ -67,18 +87,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_QWERTY] = LAYOUT(
-  KC_GRV,            KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,      KC_7,    KC_8,    KC_9,    KC_0,      KC_MINS,
-  LT(_ADJ1, KC_TAB), KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,      KC_U,    KC_I,    KC_O,    KC_P,      LT(_ADJ3, KC_BSLS),
-  LT(_ADJ1, KC_ESC), KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,      KC_J,    KC_K,    KC_L,    KC_SCLN,   LT(_ADJ3, KC_QUOT),
-  KC_LSFT,           KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,     KC_MUTE,   _______, KC_N,      KC_M,    KC_COMM, KC_DOT,  KC_SLSH,   KC_RSFT,
-                     KC_LGUI, KC_LALT, KC_LCTL, KC_SPC,  MO(_ADJ2),                    KC_BSPC,   KC_ENT,  KC_RCTL, KC_RALT, KC_RGUI
+  KC_GRV,            KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                          KC_6,      KC_7,    KC_8,    KC_9,    KC_0,      KC_MINS,
+  LT(_ADJ1, KC_TAB), KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                          KC_Y,      KC_U,    KC_I,    KC_O,    KC_P,      LT(_ADJ3, KC_BSLS),
+  LT(_ADJ1, KC_ESC), KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                          KC_H,      KC_J,    KC_K,    KC_L,    KC_SCLN,   LT(_ADJ4, KC_QUOT),
+  KC_LSFT,           KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,      MC_ENC1,   MC_ENC2, KC_N,      KC_M,    KC_COMM, KC_DOT,  KC_SLSH,   KC_RSFT,
+                     KC_LGUI, KC_LALT, KC_LCTL, KC_SPC,  MO(_ADJ2),                     KC_BSPC,   KC_ENT,  KC_RCTL, KC_RALT, KC_RGUI
 ),
 [_COLEMAK] = LAYOUT(
-  KC_GRV,            KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,      KC_7,    KC_8,    KC_9,    KC_0,      KC_MINS,
-  LT(_ADJ1, KC_TAB), KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,      KC_L,    KC_U,    KC_Y,    KC_SCLN,   LT(_ADJ3, KC_BSLS),
-  LT(_ADJ1, KC_ESC), KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                         KC_M,      KC_N,    KC_E,    KC_I,    KC_O,      LT(_ADJ1, KC_QUOT),
-  KC_LSFT,           KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,     KC_MUTE,   _______, KC_K,      KC_H,    KC_COMM, KC_DOT,  KC_SLSH,   KC_RSFT,
-                     KC_LGUI, KC_LALT, KC_LCTL, KC_SPC,  MO(_ADJ2),                    KC_BSPC,   KC_ENT,  KC_RCTL, KC_RALT, KC_RGUI
+  KC_GRV,            KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                          KC_6,      KC_7,    KC_8,    KC_9,    KC_0,      KC_MINS,
+  LT(_ADJ1, KC_TAB), KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                          KC_J,      KC_L,    KC_U,    KC_Y,    KC_SCLN,   LT(_ADJ3, KC_BSLS),
+  LT(_ADJ1, KC_ESC), KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                          KC_M,      KC_N,    KC_E,    KC_I,    KC_O,      LT(_ADJ4, KC_QUOT),
+  KC_LSFT,           KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,      MC_ENC1,   MC_ENC2, KC_K,      KC_H,    KC_COMM, KC_DOT,  KC_SLSH,   KC_RSFT,
+                     KC_LGUI, KC_LALT, KC_LCTL, KC_SPC,  MO(_ADJ2),                     KC_BSPC,   KC_ENT,  KC_RCTL, KC_RALT, KC_RGUI
 ),
 [_ARROWS] = LAYOUT(
   _______,  _______,  _______,  _______,  _______,  _______,                      _______,    _______,   _______,   _______,  _______,  _______,
@@ -104,11 +124,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_ADJ1] = LAYOUT(
-  _______,  KC_F1,    KC_F2,    KC_F3,    KC_F4,   KC_F5,                            KC_F6,      KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,
-  KC_UNDO,  KC_WREF,  _______,  KC_QUOT,  KC_DQUO, _______,                          KC_CIRC,    KC_LBRC,  KC_RBRC,  KC_LCBR,  KC_RCBR,  KC_F12,
-  KC_CAPS,  KC_WHOM,  _______,  KC_UNDS,  KC_PLUS, _______,                          KC_LEFT,    KC_DOWN,  KC_UP,    KC_RGHT,  _______,  _______,
-  KC_WBAK,  KC_WFWD,  _______,  _______,  _______, _______,     _______,    _______, KC_ASTR,    KC_LPRN,  KC_RPRN,  KC_AMPR,  KC_EQL,  _______,
-            _______,  _______,  _______,  _______, TT(_ARROWS),                      KC_DEL,     _______,  _______,  KC_HOME,  KC_END
+  _______,  KC_F1,    KC_F2,    KC_F3,    KC_F4,         KC_F5,                            KC_F6,      KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,
+  KC_UNDO,  KC_WREF,  _______,  KC_QUOT,  KC_DQUO,       _______,                          KC_CIRC,    KC_LBRC,  KC_RBRC,  KC_LCBR,  KC_RCBR,  KC_F12,
+  _______,  KC_WHOM,  _______,  KC_UNDS,  KC_PLUS,       _______,                          KC_LEFT,    KC_DOWN,  KC_UP,    KC_RGHT,  _______,  _______,
+  KC_WBAK,  KC_WFWD,  _______,  _______,  _______,       _______,     _______,    _______, KC_ASTR,    KC_LPRN,  KC_RPRN,  KC_AMPR,  KC_EQL,  _______,
+            _______,  _______,  _______,  SFT_T(KC_SPC), TT(_ARROWS),                      KC_DEL,     _______,  _______,  KC_HOME,  KC_END
 ),
 /* LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -149,7 +169,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJ3] = LAYOUT(
   _______,  _______,  _______,     _______,    _______,    _______,                      _______,    _______,  _______,   _______, _______,  _______,
   _______,  _______,  KC_MS_BTN1,  KC_MS_U,    KC_MS_BTN2, _______,                      _______,    _______,  _______,   _______, _______,  _______,
-  _______,  _______,  KC_MS_L,     KC_MS_D,    KC_MS_R,    _______,                      _______,    _______,  _______,   _______, _______,  _______,
+  KC_CAPS,  _______,  KC_MS_L,     KC_MS_D,    KC_MS_R,    _______,                      _______,    _______,  _______,   _______, _______,  _______,
   _______,  _______,  KC_WH_D,     _______,    KC_WH_U,    _______, _______,    _______, _______,    _______,  _______,   _______, _______,  _______,
                       KC_MPRV,     KC_MPLY,    KC_MNXT,    _______, _______,    _______, _______,    _______,  _______,   _______
 ),
@@ -172,14 +192,48 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_ADJ4] = LAYOUT(
-  _______,  _______,  _______,  _______,  _______,  _______,                      _______,    _______,   _______,   _______,  _______,  _______,
-  _______,  _______,  _______,  _______,  _______,  _______,                      _______,    _______,   _______,   _______,  _______,  _______,
-  _______,  _______,  _______,  _______,  _______,  _______,                      _______,    _______,   _______,   _______,  _______,  _______,
-  _______,  _______,  _______,  _______,  _______,  _______, _______,    _______, _______,    _______,   _______,   _______,  _______,  _______,
-            _______,  _______,  _______,  _______,  _______,                      _______,    _______,   _______,   _______,  _______
+  _______, _______,  _______,  _______,                _______,                _______,                      _______,    _______,   _______,   _______,  _______,  _______,
+  _______, _______,  _______,  OSM(MOD_LALT|MOD_LCTL), OSM(MOD_LALT|MOD_LCTL), _______,                      _______,    _______,   _______,   _______,  _______,  _______,
+  KC_LGUI, _______,  _______,  OSM(MOD_LGUI|MOD_LSFT), OSM(MOD_LGUI),          _______,                      _______,    _______,   _______,   _______,  _______,  _______,
+  _______, _______,  _______,  _______,                _______,                _______, _______,    _______, _______,    _______,   _______,   _______,  _______,  _______,
+           _______,  _______,  _______,                _______,                _______,                      _______,    _______,   _______,   _______,  _______
 ),
 };
 // clang-format on
+
+static uint8_t enc1_kc, enc2_kc;
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+  switch (keycode) {
+    case MC_ENC1:
+      if (record->event.pressed) {
+        if (get_mods() & MOD_MASK_SHIFT) {
+          current_enc1_layer = (current_enc1_layer + 1) % ENC1_END;
+        } else {
+          enc1_kc = enc1_map[current_enc1_layer][2];
+          register_code(enc1_kc);
+        }
+      } else {
+        unregister_code(enc1_kc);
+      }
+      return false;
+
+    case MC_ENC2:
+      if (record->event.pressed) {
+        if (get_mods() & MOD_MASK_SHIFT) {
+          current_enc2_layer = (current_enc2_layer + 1) % ENC2_END;
+        } else {
+          enc2_kc = enc2_map[current_enc2_layer][2];
+          register_code(enc2_kc);
+        }
+      } else {
+        unregister_code(enc2_kc);
+      }
+      return false;
+  }
+
+  return true;
+}
 
 #ifdef OLED_ENABLE
 #  include "matrix.h"
@@ -463,9 +517,44 @@ layer_state_t  default_layer_state_set_user(layer_state_t state) {
 
 bool oled_led_task_user(void) {
   oled_write_ln("LAY:", false);
-  oled_write_ln(default_layer == _QWERTY ? " qwe" : " col", false);
+  oled_write_ln(default_layer == _QWERTY ? " qwe\n" : " col\n", false);
+
+  switch (current_enc1_layer) {
+    case ENC1_VOL:
+      oled_write_ln("1-vo", false);
+      break;
+    case ENC1_BRI:
+      oled_write_ln("1-br", false);
+      break;
+    case ENC1_MOUSE:
+      oled_write_ln("1-ms", false);
+      break;
+    case ENC1_MOUSE_SCROLL:
+      oled_write_ln("1-wh", false);
+      break;
+    default:
+      oled_write_ln("1-??", false);
+  }
+
+  switch (current_enc2_layer) {
+    case ENC2_LEFT_RIGHT:
+      oled_write_ln("2-lr", false);
+      break;
+    case ENC2_PAGE:
+      oled_write_ln("2-pg", false);
+      break;
+    case ENC2_MOUSE:
+      oled_write_ln("2-ms", false);
+      break;
+    case ENC2_MOUSE_SCROLL:
+      oled_write_ln("2-wh", false);
+      break;
+    default:
+      oled_write_ln("1-??", false);
+  }
 
   // Print current layer
+  /*
   switch (get_highest_layer(layer_state)) {
     case 0:
       oled_write_ln(" bas", false);
@@ -484,7 +573,7 @@ bool oled_led_task_user(void) {
       break;
     default:
       oled_write_ln(" und", false);
-  }
+  }*/
 
   oled_write_ln("\nOS:", false);
   switch (prev_detected_os) {
