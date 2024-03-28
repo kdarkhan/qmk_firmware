@@ -88,8 +88,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_QWERTY] = LAYOUT(
   KC_GRV,            KC_1,      KC_2,    KC_3,    KC_4,    KC_5,                          KC_6,      KC_7,    KC_8,    KC_9,    KC_0,      KC_MINS,
-  LT(_ADJ1, KC_TAB), KC_Q,      KC_W,    KC_E,    KC_R,    KC_T,                          KC_Y,      KC_U,    KC_I,    KC_O,    KC_P,      LT(_ADJ3, KC_BSLS),
-  LT(_ADJ1, KC_ESC), KC_A,      KC_S,    KC_D,    KC_F,    KC_G,                          KC_H,      KC_J,    KC_K,    KC_L,    KC_SCLN,   LT(_ADJ4, KC_QUOT),
+  LT(_ADJ4, KC_TAB), KC_Q,      KC_W,    KC_E,    KC_R,    KC_T,                          KC_Y,      KC_U,    KC_I,    KC_O,    KC_P,      LT(_ADJ3, KC_BSLS),
+  LT(_ADJ1, KC_ESC), KC_A,      KC_S,    KC_D,    KC_F,    KC_G,                          KC_H,      KC_J,    KC_K,    KC_L,    KC_SCLN,   KC_QUOT,
   KC_LSFT,           KC_Z,      KC_X,    KC_C,    KC_V,    KC_B,      MC_ENC1,   MC_ENC2, KC_N,      KC_M,    KC_COMM, KC_DOT,  KC_SLSH,   KC_RSFT,
                      MO(_ADJ2), KC_LALT, KC_LCTL, KC_SPC,  KC_LGUI,                       KC_BSPC,   KC_ENT,  KC_RCTL, KC_RALT, KC_RGUI
 ),
@@ -136,9 +136,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_ADJ4] = LAYOUT(
   _______, _______,  _______,                _______,                _______,                _______,                      _______,    _______,   _______,   _______,  _______,  _______,
-  _______, _______,  _______,                OSM(MOD_LALT|MOD_LCTL), OSM(MOD_LSFT|MOD_LCTL), _______,                      _______,    _______,   _______,   _______,  _______,  _______,
-  KC_LGUI, _______,  OSM(MOD_LGUI|MOD_LALT), OSM(MOD_LGUI|MOD_LSFT), OSM(MOD_LGUI),          _______,                      _______,    _______,   _______,   _______,  _______,  _______,
-  _______, _______,  _______,                _______,                _______,                _______, _______,    _______, _______,    _______,   _______,   _______,  _______,  _______,
+  _______, _______,  _______,                OSM(MOD_LALT|MOD_LCTL), OSM(MOD_LSFT|MOD_LCTL), _______,                      KC_NUM,     KC_KP_7,   KC_KP_8,   KC_KP_9,  KC_PMNS,  _______,
+  KC_LGUI, _______,  OSM(MOD_LGUI|MOD_LALT), OSM(MOD_LGUI|MOD_LSFT), OSM(MOD_LGUI),          _______,                      _______,    KC_KP_3,   KC_KP_5,   KC_KP_6,  KC_PAST,  _______,
+  _______, _______,  _______,                _______,                _______,                _______, _______,    _______, KC_KP_0,    KC_KP_1,   KC_KP_2,   KC_KP_3,  KC_PSLS,  _______,
            _______,  _______,                _______,                _______,                _______,                      _______,    _______,   _______,   _______,  _______
 ),
 };
