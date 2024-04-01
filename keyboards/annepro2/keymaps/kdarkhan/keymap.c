@@ -30,6 +30,11 @@ enum anne_pro_layers {
   _NUM_LAYER,
 };
 
+enum jian_keycodes {
+  MK_BASE = SAFE_RANGE,
+  MK_WIFE,
+};
+
 // clang-format off
 // Key symbols are based on QMK. Use them to remap your keyboard
 /*
@@ -100,7 +105,7 @@ enum anne_pro_layers {
     [_FN1_LAYER] = LAYOUT_60_ansi(/* Hold FN1 */
         _______, _______, _______, _______, _______, _______, _______, _______, KC_KP_ASTERISK, KC_NUM_LOCK, KC_KP_0, KC_KP_MINUS, KC_KP_PLUS, _______,
         _______, _______, _______, _______, _______, _______, _______, KC_KP_7, KC_KP_8, KC_KP_9, _______, _______, _______, _______,
-        _______, _______, _______, DF(_BASE_LAYER), _______, _______, _______, KC_KP_4, KC_KP_5, KC_KP_6, _______, _______, _______,
+        _______, _______, _______, MK_BASE, _______, _______, _______, KC_KP_4, KC_KP_5, KC_KP_6, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_SLASH, KC_UP,
         _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_RIGHT),
     [_FN2_LAYER] = LAYOUT_60_ansi(/* Hold FN2 */
@@ -117,8 +122,8 @@ enum anne_pro_layers {
         _______, _______, _______, _______, _______, _______, _______, _______),
     [_FNX_LAYER] = LAYOUT_60_ansi(/* Holding FN2 => FN1 at the same time */
         KC_AP2_USB, KC_AP2_BT1, KC_AP2_BT2, KC_AP2_BT3, KC_AP2_BT4, KC_AP2_BT_UNPAIR, _______, _______, _______, RGB_SPD, RGB_SPI, _______, _______, DB_TOGG,
-        _______, _______, DF(_WIFE_LAYER), _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        DF(_NO_ESC_LAYER), _______, _______, DF(_BASE_LAYER), _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, MK_WIFE, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        DF(_NO_ESC_LAYER), _______, _______, MK_BASE, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______),
     [_NUM_LAYER] = LAYOUT_60_ansi(/* FN2 + RCTL, simulating numpad stuff */
@@ -154,6 +159,22 @@ bool led_update_user_unused(led_t leds) {
     }
 
     return true;
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case MK_BASE:
+      if (record->event.pressed) {
+        set_single_persistent_default_layer(_BASE_LAYER);
+      }
+      return false;
+    case MK_WIFE:
+      if (record->event.pressed) {
+        set_single_persistent_default_layer(_WIFE_LAYER);
+      }
+      return false;
+  }
+  return true;
 }
 
 #ifdef UCIS_ENABLE
