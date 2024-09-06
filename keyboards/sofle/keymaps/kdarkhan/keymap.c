@@ -1,3 +1,4 @@
+#include "oled_driver.h"
 #include QMK_KEYBOARD_H
 
 // enum encoder_state { vol_page, vol_hor,  hor_ver, vol_bri};
@@ -561,6 +562,12 @@ bool oled_task_user(void) {
 }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+  // weird config
+  // if (is_keyboard_left()) {
+  //   return OLED_ROTATION_180;
+  // }
+  // return OLED_ROTATION_270;
+
   if (is_keyboard_left()) {
     if (is_keyboard_master()) {
       return rotation;
