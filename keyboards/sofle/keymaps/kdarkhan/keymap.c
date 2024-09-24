@@ -1,3 +1,4 @@
+#include "keycodes.h"
 #include "oled_driver.h"
 #include QMK_KEYBOARD_H
 
@@ -136,8 +137,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_ADJ4] = LAYOUT(
-  _______, _______,  _______,                _______,                _______,                _______,                      _______,    _______,   _______,   _______,  _______,  _______,
-  _______, _______,  _______,                OSM(MOD_LALT|MOD_LCTL), OSM(MOD_LSFT|MOD_LCTL), _______,                      KC_NUM,     KC_KP_7,   KC_KP_8,   KC_KP_9,  KC_PMNS,  _______,
+  _______, _______,  _______,                _______,                _______,                _______,                      KC_VOLD,    KC_VOLU,   KC_BRID,   KC_BRIU,  KC_MPRV,  KC_MNXT,
+  _______, _______,  _______,                OSM(MOD_LALT|MOD_LCTL), OSM(MOD_LSFT|MOD_LCTL), _______,                      KC_NUM,     KC_KP_7,   KC_KP_8,   KC_KP_9,  KC_PMNS,  KC_MPLY,
   KC_LGUI, _______,  OSM(MOD_LGUI|MOD_LALT), OSM(MOD_LGUI|MOD_LSFT), OSM(MOD_LGUI),          _______,                      _______,    KC_KP_3,   KC_KP_5,   KC_KP_6,  KC_PAST,  _______,
   _______, _______,  _______,                _______,                _______,                _______, _______,    _______, KC_KP_0,    KC_KP_1,   KC_KP_2,   KC_KP_3,  KC_PSLS,  _______,
            _______,  _______,                _______,                _______,                _______,                      _______,    _______,   _______,   _______,  _______
