@@ -16,7 +16,7 @@
     },
     "diode_direction": "COL2ROW",
     "qmk": {
-        "tap_keycode_delay": 10
+        "tap_keycode_delay": 50
     },
     "split": {
         "enabled": true,
