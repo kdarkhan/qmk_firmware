@@ -560,8 +560,6 @@ bool oled_led_task_user(void) {
 }
 
 bool oled_task_user(void) {
-  // office setup
-  // if (!is_keyboard_left()) {
   if (is_keyboard_left()) {
     return oled_led_task_user();
   }
@@ -569,12 +567,6 @@ bool oled_task_user(void) {
 }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-  // office setup
-  // if (is_keyboard_left()) {
-  //   return OLED_ROTATION_180;
-  // }
-  // return OLED_ROTATION_270;
-
   if (is_keyboard_left()) {
     if (is_keyboard_master()) {
       return rotation;
