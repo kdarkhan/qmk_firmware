@@ -1,5 +1,9 @@
 #include "keycodes.h"
+
+#ifdef OLED_ENABLE
 #include "oled_driver.h"
+#endif
+
 #include QMK_KEYBOARD_H
 
 // enum encoder_state { vol_page, vol_hor,  hor_ver, vol_bri};
