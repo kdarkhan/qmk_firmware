@@ -42,15 +42,15 @@ static uint8_t current_enc2_layer = 0;
 const static uint16_t enc1_map[ENC1_END][3] = {
     [0] = {KC_VOLD, KC_VOLU, KC_MUTE},
     [1] = {KC_BRID, KC_BRIU, KC_MUTE},
-    [2] = {KC_MS_L, KC_MS_R, KC_MS_BTN1},
-    [3] = {KC_WH_D, KC_WH_U, KC_MS_BTN1},
+    [2] = {MS_LEFT, MS_RGHT, MS_BTN1},
+    [3] = {MS_WHLD, MS_WHLU, MS_BTN1},
 };
 
 const static uint16_t enc2_map[ENC2_END][3] = {
     [0] = {KC_LEFT, KC_RIGHT, KC_UP},
     [1] = {KC_PGDN, KC_PGUP, KC_HOME},
-    [2] = {KC_MS_D, KC_MS_U, KC_MS_BTN2},
-    [3] = {KC_WH_L, KC_WH_R, KC_MS_BTN2},
+    [2] = {MS_DOWN, MS_UP, MS_BTN2},
+    [3] = {MS_WHLL, MS_WHLR, MS_BTN2},
 };
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
@@ -134,9 +134,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_ADJ3] = LAYOUT(
   _______,  KC_F1,    KC_F2,       KC_F3,      KC_F4,      KC_F5,                        KC_F6,      KC_F7,    KC_F8,     KC_F9,   KC_F10,   KC_F11,
-  _______,  _______,  KC_MS_BTN1,  KC_MS_U,    KC_MS_BTN2, _______,                      _______,    _______,  _______,   _______, _______,  _______,
-  KC_CAPS,  _______,  KC_MS_L,     KC_MS_D,    KC_MS_R,    _______,                      _______,    _______,  _______,   _______, _______,  _______,
-  _______,  _______,  KC_WH_D,     _______,    KC_WH_U,    _______, _______,    _______, _______,    _______,  _______,   _______, _______,  _______,
+  _______,  _______,  MS_BTN1,  MS_UP,    MS_BTN2, _______,                      _______,    _______,  _______,   _______, _______,  _______,
+  KC_CAPS,  _______,  MS_LEFT,     MS_DOWN,    MS_RGHT,    _______,                      _______,    _______,  _______,   _______, _______,  _______,
+  _______,  _______,  MS_WHLD,     _______,    MS_WHLU,    _______, _______,    _______, _______,    _______,  _______,   _______, _______,  _______,
                       KC_MPRV,     KC_MPLY,    KC_MNXT,    _______, _______,    _______, _______,    _______,  _______,   _______
 ),
 
