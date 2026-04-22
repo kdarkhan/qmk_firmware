@@ -466,7 +466,7 @@ layer_state_t  default_layer_state_set_user(layer_state_t state) {
 
 bool oled_led_task_user(void) {
   oled_write_ln("LAY:", false);
-  oled_write_ln(default_layer == _QWERTY ? " qwe\n" : " col\n", false);
+  oled_write_ln(default_layer == _QWERTY ? " qwe\n" : " gam\n", false);
 
   switch (current_enc1_layer) {
     case ENC1_VOL:
