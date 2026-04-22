@@ -66,7 +66,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 enum sofle_layers {
   /* _M_XYZ = Mac Os, _W_XYZ = Win/Linux */
   _QWERTY,
-  _COLEMAK,
+  _GAME,
   _ARROWS,
   _ADJ1,
   _ADJ2,
@@ -100,12 +100,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                      MO(_ADJ2),    KC_LALT,      KC_LCTL,      KC_SPC,       KC_LGUI,                       KC_BSPC,   KC_ENT,       KC_RCTL,      KC_RALT,      KC_RGUI
 ),
 
-[_COLEMAK] = LAYOUT(
-  _______,  _______, _______,  _______,  _______,  _______,                        _______,   _______,  _______,  _______,  _______,   _______,
-  _______,  KC_Q,    KC_W,     KC_F,     KC_P,     KC_B,                           KC_J,      KC_L,     KC_U,     KC_Y,     KC_SCLN,   _______,
-  _______,  KC_A,    KC_R,     KC_S,     KC_T,     KC_G,                           KC_M,      KC_N,     KC_E,     KC_I,     KC_O,      _______,
-  _______,  KC_Z,    KC_X,     KC_C,     KC_D,     KC_V,      _______,   _______,  KC_K,      KC_H,     KC_COMM,  KC_DOT,   KC_SLSH,   _______,
-            _______, _______,  _______,  _______,  _______,                        _______,   _______,  _______,  _______,  _______
+[_GAME] = LAYOUT(
+  KC_GRV,            KC_1,         KC_2,         KC_3,         KC_4,         KC_5,                          KC_6,      KC_7,         KC_8,         KC_9,         KC_0,            KC_MINS,
+  KC_TAB,            KC_Q,         KC_W,         KC_E,         KC_R,         KC_T,                          KC_Y,      KC_U,         KC_I,         KC_O,         KC_P,            LT(_ADJ3, KC_BSLS),
+  KC_ESC,            KC_A,         KC_S,         KC_D,         KC_F        , KC_G,                          KC_H,      KC_J,         KC_K,         KC_L,         KC_SCLN,         KC_QUOT,
+  KC_LSFT,           KC_Z,         KC_X,         KC_C,         KC_V,         KC_B,      MC_ENC1,   MC_ENC2, KC_N,      KC_M,         KC_COMM,      KC_DOT,       KC_SLSH,         KC_RSFT,
+                     MO(_ADJ2),    KC_LALT,      KC_LCTL,      KC_SPC,       KC_LGUI,                       KC_BSPC,   KC_ENT,       KC_RCTL,      KC_RALT,      KC_RGUI
 ),
 
 [_ARROWS] = LAYOUT(
@@ -128,7 +128,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,  _______,  _______,  _______,      _______, _______,                      _______,    _______,  _______,  _______, _______,  _______,
   KC_TAB,   KC_INS,   KC_APP,   _______,      _______, _______,                      _______,    _______,  _______,  _______, _______,  _______,
   _______,  KC_PSCR,  _______,  DF(_QWERTY),  _______, _______,                      _______,    _______,  _______,  _______, _______,  _______,
-  _______,  _______,  _______,  DF(_COLEMAK), _______, _______, _______,    _______, _______,    _______,  _______,  _______, _______,  _______,
+  _______,  _______,  _______,  DF(_GAME), _______, _______, _______,    _______, _______,    _______,  _______,  _______, _______,  _______,
             _______,  _______,  _______,      _______, _______,                      _______,    _______,  _______,  _______, _______
 ),
 
@@ -457,8 +457,8 @@ layer_state_t  default_layer_state_set_user(layer_state_t state) {
     case _QWERTY:
       default_layer = _QWERTY;
       break;
-    case _COLEMAK:
-      default_layer = _COLEMAK;
+    case _GAME:
+      default_layer = _GAME;
       break;
   };
   return state;
